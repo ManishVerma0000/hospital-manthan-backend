@@ -5,6 +5,27 @@ import { CategoriesService } from './categories.service';
 @Controller('categories')
 export class CategoriesController {
   constructor(private readonly categoryService: CategoriesService) {}
+  @Post()
+  async create(@Body() requestBody: CreateCategoryDto): Promise<any> {
+    try {
+      const response = await this.categoryService.create(requestBody);
+      return {
+        message: 'Category created successfully',
+        data: response,
+        success: true,
+        statusCode: 201,
+      };
+    } catch (error) {
+      return {
+        message: 'Error creating category',
+        data: null,
+        success: false,
+        statusCode: 500,
+        error: error.message,
+      };
+    }
+  }
+
   @Get('/list')
   async findAll(): Promise<any> {
     try {

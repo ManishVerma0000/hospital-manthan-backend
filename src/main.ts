@@ -5,7 +5,16 @@ import { join } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-
+  app.enableCors({
+    origin: [
+      'http://localhost:3000', // Next.js local
+      'http://localhost:3001', // React local
+      'http://yourdomain.com', // production domain
+      'https://yourdomain.com',
+    ],
+    methods: 'GET,POST,PUT,DELETE,PATCH',
+    credentials: true,
+  });
   app.useStaticAssets(join(process.cwd(), 'uploads'), {
     prefix: '/uploads/',
   });
