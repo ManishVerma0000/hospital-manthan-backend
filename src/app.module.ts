@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './db/conn';
@@ -6,9 +6,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { DoctorModule } from './doctor/doctor.module';
 import { CategoriesModule } from './categories/categories.module';
-import { CatogriesService } from './catogries/catogries.service';
-import { CatogriesController } from './catogries/catogries.controller';
-import { CateogriesController } from './cateogries/cateogries.controller';
+import { UploadMiddleware } from './middleware/upload.middleware';
+import { UploadImagesModule } from './upload-images/upload-images.module';
+
 
 @Module({
   imports: [
@@ -19,9 +19,14 @@ import { CateogriesController } from './cateogries/cateogries.controller';
       useFactory: async (configService: ConfigService) => ({
         uri: configService.get<string>('MONGO_URI')
       }),
-    }), DoctorModule, CategoriesModule,
+    }), DoctorModule, CategoriesModule, UploadImagesModule,
   ],
-  controllers: [AppController, CatogriesController, CateogriesController],
-  providers: [AppService, CatogriesService],
+  controllers: [AppController],
+  providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+    configure(consumer: MiddlewareConsumer) {
+    consumer.apply(UploadMiddleware).forRoutes('upload-image');
+  }
+
+}
