@@ -1,10 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { DatabaseModule } from './db/conn';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { DoctorModule } from './doctor/doctor.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -15,9 +11,8 @@ import { DoctorModule } from './doctor/doctor.module';
       useFactory: async (configService: ConfigService) => ({
         uri: configService.get<string>('MONGO_URI')
       }),
-    }), DoctorModule,
+    }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  exports: [MongooseModule],
 })
-export class AppModule {}
+export class DatabaseModule {}
