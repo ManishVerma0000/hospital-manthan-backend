@@ -45,7 +45,7 @@ export class Hospital {
   @Prop({ required: true })
   governmentPanelName: string;
 
-  @Prop({ type: [String], required: true })
+  @Prop({ required: true })
   imageUrl: string;
 
   @Prop({ type: [Timing], required: true })
