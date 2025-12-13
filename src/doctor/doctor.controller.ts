@@ -18,6 +18,7 @@ export class DoctorController {
         statusCode: 201,
       };
     } catch (error) {
+      console.log(error)
       return {
         message: 'Error creating doctor',
         data: null,

@@ -15,20 +15,20 @@ export class Doctor {
   @Prop({ required: true })
   whatsAppNumber: string;
 
-  @Prop({ type: [String], required: true })
+  @Prop({ required: true })
   treatmentProvide: string[];
 
-  @Prop({ type: [String], required: true })
+  @Prop({  required: true })
   timing: string[];
 
-  @Prop({ type: [String], required: true })
+  @Prop({ required: true })
   workingFrom: string;
 
-  @Prop({ type: [String], required: true })
+  @Prop({ required: true })
   qualificationAndExperience: string;
 
-  @Prop({ type: [String], required: true })
-  about: string[];
+  @Prop({ required: true })
+  about: string;
 
   @Prop({ type: [String], required: true })
   imageUrl: string;
