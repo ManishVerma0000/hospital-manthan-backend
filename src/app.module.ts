@@ -10,6 +10,7 @@ import { UploadMiddleware } from './middleware/upload.middleware';
 import { UploadImagesModule } from './upload-images/upload-images.module';
 import { HospitalModule } from './hospital/hospital.module';
 import { HospitalCategoryModule } from './hospital-category/hospital-category.module';
+import { InsuranceCompanyModule } from './insurance-company/insurance-company.module';
 
 
 @Module({
@@ -21,7 +22,7 @@ import { HospitalCategoryModule } from './hospital-category/hospital-category.mo
       useFactory: async (configService: ConfigService) => ({
         uri: configService.get<string>('MONGO_URI')
       }),
-    }), DoctorModule, CategoriesModule, UploadImagesModule, HospitalModule, HospitalCategoryModule,
+    }), DoctorModule, CategoriesModule, UploadImagesModule, HospitalModule, HospitalCategoryModule, InsuranceCompanyModule,
   ],
   controllers: [AppController],
   providers: [AppService],
