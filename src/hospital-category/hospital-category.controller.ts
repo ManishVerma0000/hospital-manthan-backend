@@ -1,10 +1,10 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 
 import { stat } from 'fs';
 import { HospitalCategoryService } from './hospital-category.service';
 import { CreateHospitalCategoryDto } from './dto/hospital-category.dto';
 
-@Controller('doctor')
+@Controller('hospital-category')
 export class HospitalCategoryController {
   constructor(
     private readonly hospitalCategoryService: HospitalCategoryService,
@@ -49,6 +49,27 @@ export class HospitalCategoryController {
         success: false,
         statusCode: 500,
         error: error.message,
+      };
+    }
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string) {
+    try {
+      const deleted = await this.hospitalCategoryService.deleteById(id);
+
+      return {
+        message: 'Hospital Category deleted successfully',
+        success: true,
+        data: deleted,
+        statusCode: 200,
+      };
+    } catch (error) {
+      return {
+        message: error.message || 'Error deleting Hospital Category',
+        success: false,
+        data: null,
+        statusCode: 500,
       };
     }
   }

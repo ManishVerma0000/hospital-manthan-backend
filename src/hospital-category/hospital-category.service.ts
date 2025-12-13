@@ -21,4 +21,9 @@ export class HospitalCategoryService {
     const response = await this.doctorModel.find().exec();
     return response;
   }
+
+  async deleteById(id: string): Promise<any> {
+    const response = await this.doctorModel.findByIdAndDelete(id).exec();
+    return response;
+  }
 }
