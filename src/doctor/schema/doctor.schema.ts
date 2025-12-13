@@ -19,7 +19,7 @@ export class Doctor {
   treatmentProvide: string[];
 
   @Prop({  required: true })
-  timing: string[];
+  timing: string;
 
   @Prop({ required: true })
   workingFrom: string;

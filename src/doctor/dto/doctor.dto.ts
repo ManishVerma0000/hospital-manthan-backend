@@ -13,15 +13,13 @@ export class CreateDoctorDto {
   @IsNotEmpty()
   whatsAppNumber: string;
 
-  @IsArray()
   @IsString({ each: true })
   @IsNotEmpty()
-  treatmentProvide: string[];
+  treatmentProvide: string;
 
-  @IsArray()
   @IsString({ each: true })
   @IsNotEmpty()
-  timing: string[];
+  timing: string;
 
   @IsString()
   @IsNotEmpty()
@@ -31,10 +29,9 @@ export class CreateDoctorDto {
   @IsNotEmpty()
   qualificationAndExperience: string;
 
-  @IsArray()
   @IsString({ each: true })
   @IsNotEmpty()
-  about: string[];
+  about: string;
 
   @IsString()
   @IsNotEmpty()

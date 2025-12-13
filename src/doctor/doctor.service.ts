@@ -7,15 +7,15 @@ import { CreateDoctorDto } from './dto/doctor.dto';
 @Injectable()
 export class DoctorService {
   constructor(
-    @InjectModel(Doctor.name) private roleModel: Model<DoctorDocument>,
+    @InjectModel(Doctor.name) private doctorModel: Model<DoctorDocument>,
   ) {}
 
   async create(requestBody: CreateDoctorDto): Promise<Doctor> {
-    const role = await  this.roleModel.create(requestBody);
+    const role = await  this.doctorModel.create(requestBody);
     return role
   }
 
   async findAll(): Promise<Doctor[]> {
-    return this.roleModel.find().exec();
+    return this.doctorModel.find().exec();
   } 
 }
