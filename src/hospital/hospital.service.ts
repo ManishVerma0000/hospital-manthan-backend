@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateHospitalDto } from './dto/hospital.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Hospital, HospitalDocument } from './schema/hospital.schema';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 @Injectable()
 export class HospitalService {
   constructor(
@@ -13,10 +13,24 @@ export class HospitalService {
   getHello(): string {
     return 'Hello World!';
   }
-  create(requestBody: CreateHospitalDto): any {
-    const hospital = new this.hospitalModel(requestBody);
+  async create(createHospitalDto: CreateHospitalDto) {
+    const hospital = new this.hospitalModel({
+      ...createHospitalDto,
+      hospitalType: new Types.ObjectId(createHospitalDto.hospitalType),
+      treatmentList: createHospitalDto.treatmentList.map(
+        (id) => new Types.ObjectId(id),
+      ),
+      cashlessList: createHospitalDto.cashlessList.map(
+        (id) => new Types.ObjectId(id),
+      ),
+      panelList: createHospitalDto.panelList.map(
+        (id) => new Types.ObjectId(id),
+      ),
+    });
+
     return hospital.save();
   }
+
   getListOfHospitals(): any {
     return this.hospitalModel.find().exec();
   }

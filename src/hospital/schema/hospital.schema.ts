@@ -1,28 +1,24 @@
-// user.schema.ts
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
-import { Timing } from '../../hospital/schema/timing.schema';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Document, Types } from "mongoose";
+
 export type HospitalDocument = Hospital & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Hospital {
   @Prop({ required: true })
   hospitalName: string;
 
-  @Prop({ required: true })
-  hospitalType: string;
+  @Prop({ type: Types.ObjectId, required: true })
+  hospitalType: Types.ObjectId;
 
   @Prop({ required: true })
   contactNumber: string;
 
   @Prop({ required: true })
-  whatsAppNumber: string;
+  whatsapp: string;
 
   @Prop({ required: true })
-  emailAddress: string;
-
-  @Prop({ required: true })
-  iconImageUrl: string;
+  email: string;
 
   @Prop({ required: true })
   city: string;
@@ -33,23 +29,35 @@ export class Hospital {
   @Prop({ required: true })
   location: string;
 
-  @Prop({ required: true })
-  hospitalDetails: string;
+  @Prop()
+  iconUrl: string;
 
-  @Prop({ required: true })
-  insuranceCompany: string;
+  @Prop({ type: [String], default: [] })
+  imageUrls: string[];
 
-  @Prop({ required: true })
-  cashlessInsuranceCompany: string;
+  @Prop({
+    type: [
+      {
+        days: { type: String },
+        time: { type: String },
+      },
+    ],
+    default: [],
+  })
+  timings: {
+    days: string;
+    time: string;
+  }[];
 
-  @Prop({ required: true })
-  governmentPanelName: string;
+  // ---------- STEP 2 ----------
+  @Prop({ type: [Types.ObjectId], ref: "InsuranceCompany", default: [] })
+  treatmentList: Types.ObjectId[];
 
-  @Prop({ required: true })
-  imageUrl: string;
+  @Prop({ type: [Types.ObjectId], ref: "CashlessInsuranceCompany", default: [] })
+  cashlessList: Types.ObjectId[];
 
-  @Prop({ type: [Timing], required: true })
-  timing: Timing[];
+  @Prop({ type: [Types.ObjectId], ref: "GovernmentPanel", default: [] })
+  panelList: Types.ObjectId[];
 }
 
 export const HospitalSchema = SchemaFactory.createForClass(Hospital);

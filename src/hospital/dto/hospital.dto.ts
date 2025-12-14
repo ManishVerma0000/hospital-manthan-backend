@@ -1,74 +1,71 @@
-// create-hospital.dto.ts
 import {
-  IsString,
-  IsNotEmpty,
   IsArray,
-  IsOptional,
-  IsUrl,
   IsEmail,
+  IsMongoId,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
   ValidateNested,
-} from 'class-validator';
-import { TimingDto } from './timing.dto';
+} from "class-validator";
+import { Type } from "class-transformer";
+
+class TimingDto {
+  @IsString()
+  days: string;
+
+  @IsString()
+  time: string;
+}
+
 export class CreateHospitalDto {
   @IsString()
   @IsNotEmpty()
   hospitalName: string;
 
-  @IsString()
-  @IsNotEmpty()
+  @IsMongoId()
   hospitalType: string;
 
   @IsString()
-  @IsNotEmpty()
   contactNumber: string;
 
   @IsString()
-  @IsNotEmpty()
-  whatsAppNumber: string;
+  whatsapp: string;
 
   @IsEmail()
-  @IsNotEmpty()
-  emailAddress: string;
+  email: string;
 
   @IsString()
-  @IsNotEmpty()
-  iconImageUrl: string;
-
-  @IsString()
-  @IsNotEmpty()
   city: string;
 
   @IsString()
-  @IsNotEmpty()
   mapDirection: string;
 
   @IsString()
-  @IsNotEmpty()
   location: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  hospitalDetails: string;
+  iconUrl?: string;
 
-  @IsString()
-  @IsNotEmpty()
-  insuranceCompany: string;
-
-  @IsString()
-  @IsNotEmpty()
-  cashlessInsuranceCompany: string;
-
-  @IsString()
-  @IsNotEmpty()
-  governmentPanelName: string;
-
-  // multiple images
   @IsArray()
   @IsString({ each: true })
-  imageUrl: string[];
+  imageUrls: string[];
 
-  // timings array
   @IsArray()
   @ValidateNested({ each: true })
-  timing: TimingDto[];
+  @Type(() => TimingDto)
+  timings: TimingDto[];
+
+  // ---------- STEP 2 ----------
+  @IsArray()
+  @IsMongoId({ each: true })
+  treatmentList: string[];
+
+  @IsArray()
+  @IsMongoId({ each: true })
+  cashlessList: string[];
+
+  @IsArray()
+  @IsMongoId({ each: true })
+  panelList: string[];
 }
