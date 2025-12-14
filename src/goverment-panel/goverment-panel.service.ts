@@ -21,4 +21,10 @@ export class GovermentPanelService {
     const response = await this.govermentPanelModel.find().exec();
     return response;
   }
+  async deleteById(id: string): Promise<any> {
+    const response = await this.govermentPanelModel
+      .findByIdAndDelete(id)
+      .exec();
+    return response;
+  }
 }
