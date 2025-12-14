@@ -10,16 +10,15 @@ import { Model } from 'mongoose';
 export class GovermentPanelService {
   constructor(
     @InjectModel(GovermentPanel.name)
-    private doctorModel: Model<GovermentPanelDocument>,
+    private govermentPanelModel: Model<GovermentPanelDocument>,
   ) {}
 
   async create(requestBody: any): Promise<any> {
-    const response=await this.doctorModel.create(requestBody);
+    const response = await this.govermentPanelModel.create(requestBody);
     return response;
   }
   async findAll(): Promise<any[]> {
-    const response=await this.doctorModel.find().exec();
-    return response
+    const response = await this.govermentPanelModel.find().exec();
+    return response;
   }
-  
 }
