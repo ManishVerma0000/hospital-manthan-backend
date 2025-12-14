@@ -1,7 +1,7 @@
 import { IsString, IsNotEmpty } from 'class-validator';
 
-export class CreateInsuranceCompanyDto {
+export class CreateGovernmentPanelDto {
   @IsString()
   @IsNotEmpty()
-  insuranceCompany: string;
+  panelName: string;
 }

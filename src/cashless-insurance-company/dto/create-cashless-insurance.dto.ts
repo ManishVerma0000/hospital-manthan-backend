@@ -1,7 +1,7 @@
 import { IsString, IsNotEmpty } from 'class-validator';
 
-export class CreateInsuranceCompanyDto {
+export class CreateCashlessInsuranceDto {
   @IsString()
   @IsNotEmpty()
-  insuranceCompany: string;
+  cashlessInsuranceCompany: string;
 }

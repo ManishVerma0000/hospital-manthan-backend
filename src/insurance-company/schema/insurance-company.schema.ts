@@ -7,7 +7,7 @@ export type InsuranceCompanyDocument = InsuranceCompany & Document;
 @Schema()
 export class InsuranceCompany {
   @Prop({ required: true })
-  hospitalCategory: string;
+  insuranceCompany: string;
 }
 
 export const InsuranceCompanySchema =
