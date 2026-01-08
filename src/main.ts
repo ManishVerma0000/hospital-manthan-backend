@@ -8,7 +8,10 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:3000', // Next.js local
-      'http://localhost:3001', // React local
+      'http://localhost:3001', 
+      'http://localhost:3002',
+      
+      // React local
       'http://yourdomain.com', // production domain
       'https://yourdomain.com',
     ],
