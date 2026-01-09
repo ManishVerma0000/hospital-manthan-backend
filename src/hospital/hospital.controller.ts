@@ -9,6 +9,7 @@ export class HospitalController {
   async create(@Body() requestBody: CreateHospitalDto): Promise<any> {
     try {
       const response = await this.hospitalServices.create(requestBody);
+      console.log(response)
       return {
         message: 'Hospital created successfully',
         data: response,
