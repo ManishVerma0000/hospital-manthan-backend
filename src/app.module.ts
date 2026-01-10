@@ -15,6 +15,7 @@ import { CashlessInsuranceCompanyModule } from './cashless-insurance-company/cas
 import { GovermentPanelModule } from './goverment-panel/goverment-panel.module';
 import { BookAppointmentModule } from './book-appointment/book-appointment.module';
 import { ContactUsModule } from './contact-us/contact-us.module';
+import { AdminModule } from './admin/admin.module';
 
 
 @Module({
@@ -26,7 +27,7 @@ import { ContactUsModule } from './contact-us/contact-us.module';
       useFactory: async (configService: ConfigService) => ({
         uri: configService.get<string>('MONGO_URI')
       }),
-    }), DoctorModule, CategoriesModule, UploadImagesModule, HospitalModule, HospitalCategoryModule, InsuranceCompanyModule, CashlessInsuranceCompanyModule, GovermentPanelModule, BookAppointmentModule, ContactUsModule,
+    }), DoctorModule, CategoriesModule, UploadImagesModule, HospitalModule, HospitalCategoryModule, InsuranceCompanyModule, CashlessInsuranceCompanyModule, GovermentPanelModule, BookAppointmentModule, ContactUsModule, AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],
