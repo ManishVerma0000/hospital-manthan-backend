@@ -6,11 +6,16 @@ import { Model } from 'mongoose';
 export class BookAppointmentService {
   constructor(
     @InjectModel(BookAppointment.name)
-    private govermentPanelModel: Model<BookAppointment>,
+    private bookAppointment: Model<BookAppointment>,
   ) {}
 
   async create(requestBody: any): Promise<any> {
-    const response = await this.govermentPanelModel.create(requestBody);
+    const response = await this.bookAppointment.create(requestBody);
+    return response;
+  }
+
+  async getList(){
+    const response=await this.bookAppointment.find()
     return response;
   }
 }

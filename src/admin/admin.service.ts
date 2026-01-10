@@ -13,7 +13,10 @@ export class AdminService {
   ) {}
 
   async create(requestBody: AdminRegisterDto) {
-    const response = await this.adminModel.create(requestBody);
+    const response = await this.adminModel.create({
+        username:requestBody?.username,
+        password:requestBody?.password
+    });
     return response;
   }
 

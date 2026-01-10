@@ -6,7 +6,7 @@ import { AdminLoginDto } from './dto/admin.login.dto';
 export class AdminController {
   constructor(private readonly adminServices: AdminService) {}
 
-  @Post()
+  @Post("/create")
   async create(@Body() requestBody: AdminLoginDto): Promise<any> {
     try {
       const response = await this.adminServices.create(requestBody);

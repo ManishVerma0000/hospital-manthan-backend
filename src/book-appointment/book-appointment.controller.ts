@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { BookAppointmentService } from './book-appointment.service';
 import { BookAppointmentDto } from './dto/book-appointment.dto';
 
@@ -29,4 +29,28 @@ export class BookAppointmentController {
       };
     }
   }
+
+
+
+  @Get('/list')
+    async list() {
+      try {
+        const response = await this.bookAppointementService.getList();
+        return {
+          message: 'Book Appointment list retrieved successfully',
+          data: response,
+          success: true,
+          statusCode: 201,
+        };
+      } catch (error) {
+        console.log(error);
+        return {
+          message: ' Error during Appointment creating retrieved',
+          data: null,
+          success: false,
+          statusCode: 500,
+          error: error.message,
+        };
+      }
+    }
 }

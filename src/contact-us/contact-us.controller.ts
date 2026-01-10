@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ContactUsService } from './contact-us.service';
 import { ContactUsDto } from './dto/contact-us.dto';
 
@@ -27,4 +27,29 @@ export class ContactUsController {
       };
     }
   }
+
+
+
+  @Get('/list')
+  async list() {
+    try {
+      const response = await this.contactUsService.getList();
+      return {
+        message: 'Government panel list retrieved successfully',
+        data: response,
+        success: true,
+        statusCode: 201,
+      };
+    } catch (error) {
+      console.log(error);
+      return {
+        message: 'Error creating retrieved',
+        data: null,
+        success: false,
+        statusCode: 500,
+        error: error.message,
+      };
+    }
+  }
+
 }

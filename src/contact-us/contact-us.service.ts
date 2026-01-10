@@ -14,4 +14,9 @@ export class ContactUsService {
     const response = await this.contactUsModel.create(requestBody);
     return response;
   }
+
+  async getList(){
+    const response=await this.contactUsModel.find();
+    return response
+  }
 }
