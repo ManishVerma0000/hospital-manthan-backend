@@ -10,7 +10,9 @@ export class DoctorController {
   @Post()
   async create(@Body() requestBody: CreateDoctorDto): Promise<any> {
     try {
+      console.log(requestBody)
       const response = await this.doctorService.create(requestBody);
+      console.log(response,'response')
       return {
         message: 'Doctor created successfully',
         data: response,

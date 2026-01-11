@@ -1,4 +1,12 @@
-import { IsString, IsNotEmpty, IsArray, IsOptional, IsUrl } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsString,
+  IsNotEmpty,
+  IsArray,
+  IsOptional,
+  IsUrl,
+  ValidateNested,
+} from 'class-validator';
 
 export class CreateDoctorDto {
   @IsString()
@@ -17,9 +25,10 @@ export class CreateDoctorDto {
   @IsNotEmpty()
   treatmentProvide: string;
 
-  @IsString({ each: true })
-  @IsNotEmpty()
-  timing: string;
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => TimingDto)
+  timings: TimingDto[];
 
   @IsString()
   @IsNotEmpty()
@@ -36,4 +45,14 @@ export class CreateDoctorDto {
   @IsString()
   @IsNotEmpty()
   imageUrl: string;
+}
+
+export class TimingDto {
+  @IsString()
+  @IsNotEmpty()
+  day: string;
+
+  @IsString()
+  @IsNotEmpty()
+  time: string;
 }

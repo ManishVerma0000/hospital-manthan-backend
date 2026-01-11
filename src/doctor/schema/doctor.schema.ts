@@ -4,10 +4,10 @@ import { Document, Types } from 'mongoose';
 
 export type DoctorDocument = Doctor & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Doctor {
-  @Prop({ required: true })
-  hospital: string;
+  @Prop({ type: Types.ObjectId, ref: 'Hospital', required: true })
+  hospital: Types.ObjectId;
 
   @Prop({ required: true })
   contactNumber: string;
@@ -15,11 +15,23 @@ export class Doctor {
   @Prop({ required: true })
   whatsAppNumber: string;
 
-  @Prop({ required: true })
+  @Prop({ type: [String], required: true })
   treatmentProvide: string[];
 
-  @Prop({  required: true })
-  timing: string;
+  // ✅ UPDATED TIMINGS
+  @Prop({
+    type: [
+      {
+        day: { type: String, required: true },
+        time: { type: String, required: true },
+      },
+    ],
+    required: true,
+  })
+  timings: {
+    day: string;
+    time: string;
+  }[];
 
   @Prop({ required: true })
   workingFrom: string;
@@ -31,7 +43,7 @@ export class Doctor {
   about: string;
 
   @Prop({ type: [String], required: true })
-  imageUrl: string;
+  imageUrl: string[];
 }
 
 export const DoctorSchema = SchemaFactory.createForClass(Doctor);
