@@ -7,6 +7,7 @@ import {
 import { UploadImagesService } from './upload-images.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import multer from 'multer';
+
 @Controller('upload-images')
 export class UploadImagesController {
   constructor(private readonly uploadService: UploadImagesService) {}
@@ -14,32 +15,27 @@ export class UploadImagesController {
   @Post('image')
   @UseInterceptors(
     FileInterceptor('image', {
-      storage: multer.diskStorage({
-        destination: './uploads',
-        filename: (req, file, cb) => {
-          const filename =
-            Date.now() + '-' + file.originalname.replace(/\s+/g, '_');
-          cb(null, filename);
-        },
-      }),
+      storage: multer.memoryStorage(), // 🔴 NO local files
     }),
   )
-  async uploadImage(@UploadedFile() file: multer.File) {
+  async uploadImage(@UploadedFile() file: Express.Multer.File) {
     if (!file) {
       return {
         success: false,
         message: 'No file uploaded',
       };
     }
-    const fileUrl = this.uploadService.getFileUrl(file.filename);
+
+    const result = await this.uploadService.uploadBufferToS3(
+      file.buffer,
+      file.originalname,
+      file.mimetype,
+    );
+
     return {
       success: true,
       message: 'Image uploaded successfully',
-      file: {
-        filename: file.filename,
-        url: fileUrl,
-      },
+      filename: result?.url,
     };
   }
-  
 }
