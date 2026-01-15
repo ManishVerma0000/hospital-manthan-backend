@@ -36,7 +36,10 @@ let UploadImagesController = class UploadImagesController {
         return {
             success: true,
             message: 'Image uploaded successfully',
-            filename: result?.url,
+            file: {
+                filename: file.filename,
+                url: result?.url,
+            },
         };
     }
 };

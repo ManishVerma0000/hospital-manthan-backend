@@ -5,10 +5,13 @@ export declare class UploadImagesController {
     uploadImage(file: Express.Multer.File): Promise<{
         success: boolean;
         message: string;
-        filename?: undefined;
+        file?: undefined;
     } | {
         success: boolean;
         message: string;
-        filename: string;
+        file: {
+            filename: string;
+            url: string;
+        };
     }>;
 }
