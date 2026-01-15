@@ -14,15 +14,11 @@ async function bootstrap() {
       "https://healthvandanam.com/",
       "https://www.healthvandanam.com",
       "https://admin.healthvandanam.com",
-
-      
-      // React local
-      'http://yourdomain.com', // production domain
-      'https://yourdomain.com',
+      "*"
     ],
     methods: 'GET,POST,PUT,DELETE,PATCH',
     credentials: true,
-  });
+  })
   app.useStaticAssets(join(process.cwd(), 'uploads'), {
     prefix: '/uploads/',
   });

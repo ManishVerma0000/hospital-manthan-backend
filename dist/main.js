@@ -13,8 +13,8 @@ async function bootstrap() {
             "https://admin.healthvandanam.com/",
             "https://healthvandanam.com/",
             "https://www.healthvandanam.com",
-            'http://yourdomain.com',
-            'https://yourdomain.com',
+            "https://admin.healthvandanam.com",
+            "*"
         ],
         methods: 'GET,POST,PUT,DELETE,PATCH',
         credentials: true,
