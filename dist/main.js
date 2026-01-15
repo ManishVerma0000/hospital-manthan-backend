@@ -10,6 +10,8 @@ async function bootstrap() {
             'http://localhost:3000',
             'http://localhost:3001',
             'http://localhost:3002',
+            "https://admin.healthvandanam.com/",
+            "https://healthvandanam.com/",
             'http://yourdomain.com',
             'https://yourdomain.com',
         ],
