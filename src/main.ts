@@ -13,6 +13,7 @@ async function bootstrap() {
       "https://admin.healthvandanam.com/",
       "https://healthvandanam.com/",
       
+      
       // React local
       'http://yourdomain.com', // production domain
       'https://yourdomain.com',
