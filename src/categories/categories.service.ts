@@ -11,11 +11,11 @@ export class CategoriesService {
   ) {}
 
   async create(requestBody: any): Promise<Categories> {
-    const role = await this.categoryModel.create(requestBody);
-    return role;
+    const category = await this.categoryModel.create(requestBody);
+    return category;
   }
 
   async findAll(): Promise<Categories[]> {
     return this.categoryModel.find().exec();
-  } 
+  }
 }

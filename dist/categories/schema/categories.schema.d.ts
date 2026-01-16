@@ -2,7 +2,7 @@ import { Document, Types } from 'mongoose';
 export type CategoriesDocument = Categories & Document;
 export declare class Categories {
     categoryName: string;
-    labelName: string;
+    status: boolean;
     imageUrl: string;
     iconImage: string;
 }

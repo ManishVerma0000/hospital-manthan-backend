@@ -10,7 +10,7 @@ export class Categories {
   categoryName: string;
 
   @Prop({ required: true })
-  labelName: string;
+  status: boolean;
 
   @Prop({ required: true })
   imageUrl: string;

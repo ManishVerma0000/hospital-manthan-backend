@@ -23,8 +23,8 @@ let CategoriesService = class CategoriesService {
         this.categoryModel = categoryModel;
     }
     async create(requestBody) {
-        const role = await this.categoryModel.create(requestBody);
-        return role;
+        const category = await this.categoryModel.create(requestBody);
+        return category;
     }
     async findAll() {
         return this.categoryModel.find().exec();

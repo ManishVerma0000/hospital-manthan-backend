@@ -13,7 +13,7 @@ exports.CategoriesSchema = exports.Categories = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 let Categories = class Categories {
     categoryName;
-    labelName;
+    status;
     imageUrl;
     iconImage;
 };
@@ -24,8 +24,8 @@ __decorate([
 ], Categories.prototype, "categoryName", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", String)
-], Categories.prototype, "labelName", void 0);
+    __metadata("design:type", Boolean)
+], Categories.prototype, "status", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)

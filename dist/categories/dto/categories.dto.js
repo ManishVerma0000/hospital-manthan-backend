@@ -13,9 +13,9 @@ exports.CreateCategoryDto = void 0;
 const class_validator_1 = require("class-validator");
 class CreateCategoryDto {
     categoryName;
-    labelName;
     imageUrl;
     iconImage;
+    status;
 }
 exports.CreateCategoryDto = CreateCategoryDto;
 __decorate([
@@ -27,15 +27,15 @@ __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateCategoryDto.prototype, "labelName", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
 ], CreateCategoryDto.prototype, "imageUrl", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateCategoryDto.prototype, "iconImage", void 0);
+__decorate([
+    (0, class_validator_1.IsBoolean)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Boolean)
+], CreateCategoryDto.prototype, "status", void 0);
 //# sourceMappingURL=categories.dto.js.map
