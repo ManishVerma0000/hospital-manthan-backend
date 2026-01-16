@@ -37,4 +37,9 @@ export class SurgeryService {
       data: savedSurgery,
     };
   }
+
+  async findAll(){
+    const response=await this.surgeryModel.find();
+    return response;
+  }
 }

@@ -48,6 +48,10 @@ let SurgeryService = class SurgeryService {
             data: savedSurgery,
         };
     }
+    async findAll() {
+        const response = await this.surgeryModel.find();
+        return response;
+    }
 };
 exports.SurgeryService = SurgeryService;
 exports.SurgeryService = SurgeryService = __decorate([

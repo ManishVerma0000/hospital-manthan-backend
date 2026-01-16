@@ -4,12 +4,25 @@ export declare class SurgeryController {
     private readonly surgeryService;
     constructor(surgeryService: SurgeryService);
     createSurgery(dto: CreateSurgeryDto): Promise<{
-        success: boolean;
         message: string;
-        data: import("mongoose").Document<unknown, {}, import("./schema/surgery.schema").SurgeryDocument, {}, {}> & import("./schema/surgery.schema").Surgery & import("mongoose").Document<import("mongoose").Types.ObjectId, any, any, Record<string, any>, {}> & Required<{
-            _id: import("mongoose").Types.ObjectId;
-        }> & {
-            __v: number;
+        data: {
+            success: boolean;
+            message: string;
+            data: import("mongoose").Document<unknown, {}, import("./schema/surgery.schema").SurgeryDocument, {}, {}> & import("./schema/surgery.schema").Surgery & import("mongoose").Document<import("mongoose").Types.ObjectId, any, any, Record<string, any>, {}> & Required<{
+                _id: import("mongoose").Types.ObjectId;
+            }> & {
+                __v: number;
+            };
         };
+        success: boolean;
+        statusCode: number;
+        error?: undefined;
+    } | {
+        message: string;
+        data: null;
+        success: boolean;
+        statusCode: number;
+        error: any;
     }>;
+    findAll(): Promise<any>;
 }

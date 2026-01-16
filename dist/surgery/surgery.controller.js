@@ -21,8 +21,46 @@ let SurgeryController = class SurgeryController {
     constructor(surgeryService) {
         this.surgeryService = surgeryService;
     }
-    createSurgery(dto) {
-        return this.surgeryService.createSurgery(dto);
+    async createSurgery(dto) {
+        try {
+            const response = await this.surgeryService.createSurgery(dto);
+            return {
+                message: 'Surgery is  created successfully',
+                data: response,
+                success: true,
+                statusCode: 201,
+            };
+        }
+        catch (error) {
+            console.log(error);
+            return {
+                message: 'Error creating doctor',
+                data: null,
+                success: false,
+                statusCode: 500,
+                error: error.message,
+            };
+        }
+    }
+    async findAll() {
+        try {
+            const response = await this.surgeryService.findAll();
+            return {
+                message: 'Government panels fetched successfully',
+                data: response,
+                success: true,
+                statusCode: 200,
+            };
+        }
+        catch (error) {
+            return {
+                message: 'Error fetching government panels',
+                data: null,
+                success: false,
+                statusCode: 500,
+                error: error.message,
+            };
+        }
     }
 };
 exports.SurgeryController = SurgeryController;
@@ -31,8 +69,14 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [CreateSurgeryDto_1.CreateSurgeryDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], SurgeryController.prototype, "createSurgery", null);
+__decorate([
+    (0, common_1.Get)('/list'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], SurgeryController.prototype, "findAll", null);
 exports.SurgeryController = SurgeryController = __decorate([
     (0, common_1.Controller)('surgery'),
     __metadata("design:paramtypes", [surgery_service_1.SurgeryService])
