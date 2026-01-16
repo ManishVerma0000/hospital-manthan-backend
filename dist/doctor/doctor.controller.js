@@ -23,7 +23,6 @@ let DoctorController = class DoctorController {
     }
     async create(requestBody) {
         try {
-            console.log(requestBody);
             const response = await this.doctorService.create(requestBody);
             console.log(response, 'response');
             return {
