@@ -62,6 +62,9 @@ let SurgeryController = class SurgeryController {
             };
         }
     }
+    async delete(id) {
+        return this.surgeryService.deleteById(id);
+    }
 };
 exports.SurgeryController = SurgeryController;
 __decorate([
@@ -77,6 +80,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], SurgeryController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], SurgeryController.prototype, "delete", null);
 exports.SurgeryController = SurgeryController = __decorate([
     (0, common_1.Controller)('surgery'),
     __metadata("design:paramtypes", [surgery_service_1.SurgeryService])

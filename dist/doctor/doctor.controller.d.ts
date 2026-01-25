@@ -4,5 +4,6 @@ export declare class DoctorController {
     private readonly doctorService;
     constructor(doctorService: DoctorService);
     create(requestBody: CreateDoctorDto): Promise<any>;
-    findAll(): Promise<any>;
+    getDoctorList(): Promise<any>;
+    deleteDoctor(id: string): Promise<any>;
 }

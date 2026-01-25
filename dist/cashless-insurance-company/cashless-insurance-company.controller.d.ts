@@ -5,4 +5,5 @@ export declare class CashlessInsuranceCompanyController {
     constructor(cashlessInsuranceCompanyService: CashlessInsuranceCompanyService);
     create(requestBody: CreateCashlessInsuranceDto): Promise<any>;
     findAll(): Promise<any>;
+    delete(id: string): Promise<any>;
 }

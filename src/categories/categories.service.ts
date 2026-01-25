@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Categories, CategoriesDocument } from './schema/categories.schema';
 import { Model } from 'mongoose';
@@ -18,4 +18,18 @@ export class CategoriesService {
   async findAll(): Promise<Categories[]> {
     return this.categoryModel.find().exec();
   }
+
+  async deleteById(id: string) {
+    const deleted =
+      await this.categoryModel.findByIdAndDelete(id);
+
+    if (!deleted) {
+      throw new NotFoundException(
+        'Category not found',
+      );
+    }
+
+    return deleted;
+  }
 }
+

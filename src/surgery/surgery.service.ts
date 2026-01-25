@@ -38,8 +38,12 @@ export class SurgeryService {
     };
   }
 
-  async findAll(){
-    const response=await this.surgeryModel.find();
+  async findAll() {
+    const response = await this.surgeryModel.find();
     return response;
+  }
+
+  async deleteById(id: string) {
+    return this.surgeryModel.findByIdAndDelete(id);
   }
 }

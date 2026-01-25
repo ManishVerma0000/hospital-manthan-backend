@@ -17,4 +17,7 @@ export class CashlessInsuranceCompanyService {
     const response = await this.govermentPanelModel.find().exec();
     return response;
   }
+  async deleteById(id: string) {
+    return this.govermentPanelModel.findByIdAndDelete(id);
+  }
 }

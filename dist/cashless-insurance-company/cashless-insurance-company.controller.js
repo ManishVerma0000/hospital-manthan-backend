@@ -62,6 +62,34 @@ let CashlessInsuranceCompanyController = class CashlessInsuranceCompanyControlle
             };
         }
     }
+    async delete(id) {
+        try {
+            const deleted = await this.cashlessInsuranceCompanyService.deleteById(id);
+            if (!deleted) {
+                return {
+                    message: 'Cashless insurance not found',
+                    success: false,
+                    data: null,
+                    statusCode: 404,
+                };
+            }
+            return {
+                message: 'Cashless insurance deleted successfully',
+                success: true,
+                data: deleted,
+                statusCode: 200,
+            };
+        }
+        catch (error) {
+            return {
+                message: 'Error deleting cashless insurance',
+                success: false,
+                data: null,
+                statusCode: 500,
+                error: error.message,
+            };
+        }
+    }
 };
 exports.CashlessInsuranceCompanyController = CashlessInsuranceCompanyController;
 __decorate([
@@ -77,6 +105,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], CashlessInsuranceCompanyController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], CashlessInsuranceCompanyController.prototype, "delete", null);
 exports.CashlessInsuranceCompanyController = CashlessInsuranceCompanyController = __decorate([
     (0, common_1.Controller)('cashless-insurance-company'),
     __metadata("design:paramtypes", [cashless_insurance_company_service_1.CashlessInsuranceCompanyService])

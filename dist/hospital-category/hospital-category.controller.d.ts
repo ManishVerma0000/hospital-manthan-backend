@@ -5,15 +5,5 @@ export declare class HospitalCategoryController {
     constructor(hospitalCategoryService: HospitalCategoryService);
     create(requestBody: CreateHospitalCategoryDto): Promise<any>;
     findAll(): Promise<any>;
-    delete(id: string): Promise<{
-        message: string;
-        success: boolean;
-        data: any;
-        statusCode: number;
-    } | {
-        message: any;
-        success: boolean;
-        data: null;
-        statusCode: number;
-    }>;
+    delete(id: string): Promise<any>;
 }

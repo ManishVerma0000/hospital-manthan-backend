@@ -25,4 +25,9 @@ export declare class SurgeryController {
         error: any;
     }>;
     findAll(): Promise<any>;
+    delete(id: string): Promise<(import("mongoose").Document<unknown, {}, import("./schema/surgery.schema").SurgeryDocument, {}, {}> & import("./schema/surgery.schema").Surgery & import("mongoose").Document<import("mongoose").Types.ObjectId, any, any, Record<string, any>, {}> & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }> & {
+        __v: number;
+    }) | null>;
 }

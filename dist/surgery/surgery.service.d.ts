@@ -18,4 +18,9 @@ export declare class SurgeryService {
     }> & {
         __v: number;
     })[]>;
+    deleteById(id: string): Promise<(import("mongoose").Document<unknown, {}, SurgeryDocument, {}, {}> & Surgery & import("mongoose").Document<import("mongoose").Types.ObjectId, any, any, Record<string, any>, {}> & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }> & {
+        __v: number;
+    }) | null>;
 }

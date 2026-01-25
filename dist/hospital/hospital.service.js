@@ -38,6 +38,9 @@ let HospitalService = class HospitalService {
     getListOfHospitals() {
         return this.hospitalModel.find().exec();
     }
+    async deleteById(id) {
+        return this.hospitalModel.findByIdAndDelete(id);
+    }
 };
 exports.HospitalService = HospitalService;
 exports.HospitalService = HospitalService = __decorate([

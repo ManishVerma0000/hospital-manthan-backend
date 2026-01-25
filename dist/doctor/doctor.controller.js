@@ -24,43 +24,62 @@ let DoctorController = class DoctorController {
     async create(requestBody) {
         try {
             const response = await this.doctorService.create(requestBody);
-            console.log(response, 'response');
             return {
                 message: 'Doctor created successfully',
                 data: response,
                 success: true,
-                statusCode: 201,
+                statusCode: common_1.HttpStatus.CREATED,
             };
         }
         catch (error) {
-            console.log(error);
-            return {
+            console.error(error);
+            throw new common_1.HttpException({
                 message: 'Error creating doctor',
                 data: null,
                 success: false,
-                statusCode: 500,
-                error: error.message,
-            };
+            }, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    async findAll() {
+    async getDoctorList() {
         try {
             const response = await this.doctorService.findAll();
             return {
-                message: 'Doctors fetched successfully',
+                message: 'Doctor list fetched successfully',
                 data: response,
                 success: true,
-                statusCode: 200,
+                statusCode: common_1.HttpStatus.OK,
             };
         }
         catch (error) {
-            return {
+            console.error(error);
+            throw new common_1.HttpException({
                 message: 'Error fetching doctors',
                 data: null,
                 success: false,
-                statusCode: 500,
-                error: error.message,
+            }, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    async deleteDoctor(id) {
+        try {
+            const deleted = await this.doctorService.deleteById(id);
+            if (!deleted) {
+                throw new common_1.HttpException('Doctor not found', common_1.HttpStatus.NOT_FOUND);
+            }
+            return {
+                message: 'Doctor deleted successfully',
+                data: deleted,
+                success: true,
+                statusCode: common_1.HttpStatus.OK,
             };
+        }
+        catch (error) {
+            console.error(error);
+            throw new common_1.HttpException({
+                message: error.message || 'Error deleting doctor',
+                data: null,
+                success: false,
+            }, error.status ||
+                common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 };
@@ -77,7 +96,14 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], DoctorController.prototype, "findAll", null);
+], DoctorController.prototype, "getDoctorList", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], DoctorController.prototype, "deleteDoctor", null);
 exports.DoctorController = DoctorController = __decorate([
     (0, common_1.Controller)('doctor'),
     __metadata("design:paramtypes", [doctor_service_1.DoctorService])

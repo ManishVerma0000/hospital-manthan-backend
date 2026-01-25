@@ -30,6 +30,9 @@ let CashlessInsuranceCompanyService = class CashlessInsuranceCompanyService {
         const response = await this.govermentPanelModel.find().exec();
         return response;
     }
+    async deleteById(id) {
+        return this.govermentPanelModel.findByIdAndDelete(id);
+    }
 };
 exports.CashlessInsuranceCompanyService = CashlessInsuranceCompanyService;
 exports.CashlessInsuranceCompanyService = CashlessInsuranceCompanyService = __decorate([

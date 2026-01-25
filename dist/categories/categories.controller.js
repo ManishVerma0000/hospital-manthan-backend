@@ -61,6 +61,26 @@ let CategoriesController = class CategoriesController {
             };
         }
     }
+    async delete(id) {
+        try {
+            const response = await this.categoryService.deleteById(id);
+            return {
+                message: 'Category deleted successfully',
+                data: response,
+                success: true,
+                statusCode: 200,
+            };
+        }
+        catch (error) {
+            return {
+                message: 'Error deleting category',
+                data: null,
+                success: false,
+                statusCode: 500,
+                error: error.message,
+            };
+        }
+    }
 };
 exports.CategoriesController = CategoriesController;
 __decorate([
@@ -76,6 +96,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], CategoriesController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], CategoriesController.prototype, "delete", null);
 exports.CategoriesController = CategoriesController = __decorate([
     (0, common_1.Controller)('categories'),
     __metadata("design:paramtypes", [categories_service_1.CategoriesService])

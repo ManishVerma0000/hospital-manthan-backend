@@ -1,53 +1,114 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Param,
+  HttpStatus,
+  HttpException,
+} from '@nestjs/common';
+
 import { DoctorService } from './doctor.service';
 import { CreateDoctorDto } from './dto/doctor.dto';
-import { stat } from 'fs';
 
 @Controller('doctor')
 export class DoctorController {
-  constructor(private readonly doctorService: DoctorService) {}
+  constructor(
+    private readonly doctorService: DoctorService,
+  ) {}
 
+  /* ---------------- Create ---------------- */
   @Post()
-  async create(@Body() requestBody: CreateDoctorDto): Promise<any> {
+  async create(
+    @Body() requestBody: CreateDoctorDto,
+  ): Promise<any> {
     try {
-      const response = await this.doctorService.create(requestBody);
-      console.log(response,'response')
+      const response =
+        await this.doctorService.create(requestBody);
+
       return {
         message: 'Doctor created successfully',
         data: response,
         success: true,
-        statusCode: 201,
+        statusCode: HttpStatus.CREATED,
       };
     } catch (error) {
-      console.log(error)
-      return {
-        message: 'Error creating doctor',
-        data: null,
-        success: false,
-        statusCode: 500,
-        error: error.message,
-      };
+      console.error(error);
+
+      throw new HttpException(
+        {
+          message: 'Error creating doctor',
+          data: null,
+          success: false,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 
+  /* ---------------- List ---------------- */
   @Get('/list')
-  async findAll(): Promise<any> {
+  async getDoctorList(): Promise<any> {
     try {
-      const response = await this.doctorService.findAll();
+      const response =
+        await this.doctorService.findAll();
+
       return {
-        message: 'Doctors fetched successfully',
+        message: 'Doctor list fetched successfully',
         data: response,
         success: true,
-        statusCode: 200,
+        statusCode: HttpStatus.OK,
       };
     } catch (error) {
+      console.error(error);
+
+      throw new HttpException(
+        {
+          message: 'Error fetching doctors',
+          data: null,
+          success: false,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  /* ---------------- Delete ---------------- */
+  @Delete(':id')
+  async deleteDoctor(
+    @Param('id') id: string,
+  ): Promise<any> {
+    try {
+      const deleted =
+        await this.doctorService.deleteById(id);
+
+      if (!deleted) {
+        throw new HttpException(
+          'Doctor not found',
+          HttpStatus.NOT_FOUND,
+        );
+      }
+
       return {
-        message: 'Error fetching doctors',
-        data: null,
-        success: false,
-        statusCode: 500,
-        error: error.message,
+        message: 'Doctor deleted successfully',
+        data: deleted,
+        success: true,
+        statusCode: HttpStatus.OK,
       };
+    } catch (error) {
+      console.error(error);
+
+      throw new HttpException(
+        {
+          message:
+            error.message || 'Error deleting doctor',
+          data: null,
+          success: false,
+        },
+        error.status ||
+          HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 }

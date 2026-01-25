@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CashlessInsuranceCompanyService } from './cashless-insurance-company.service';
 import { CreateCashlessInsuranceDto } from './dto/create-cashless-insurance.dto';
 
@@ -46,6 +46,40 @@ export class CashlessInsuranceCompanyController {
         message: 'Error fetching government panels',
         data: null,
         success: false,
+        statusCode: 500,
+        error: error.message,
+      };
+    }
+  }
+
+
+
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<any> {
+    try {
+      const deleted =
+        await this.cashlessInsuranceCompanyService.deleteById(id);
+
+      if (!deleted) {
+        return {
+          message: 'Cashless insurance not found',
+          success: false,
+          data: null,
+          statusCode: 404,
+        };
+      }
+
+      return {
+        message: 'Cashless insurance deleted successfully',
+        success: true,
+        data: deleted,
+        statusCode: 200,
+      };
+    } catch (error) {
+      return {
+        message: 'Error deleting cashless insurance',
+        success: false,
+        data: null,
         statusCode: 500,
         error: error.message,
       };

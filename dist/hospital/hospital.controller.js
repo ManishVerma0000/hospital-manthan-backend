@@ -24,42 +24,63 @@ let HospitalController = class HospitalController {
     async create(requestBody) {
         try {
             const response = await this.hospitalServices.create(requestBody);
-            console.log(response);
             return {
                 message: 'Hospital created successfully',
                 data: response,
                 success: true,
-                statusCode: 201,
+                statusCode: common_1.HttpStatus.CREATED,
             };
         }
         catch (error) {
-            return {
+            console.error(error);
+            throw new common_1.HttpException({
                 message: 'Error creating Hospital',
                 data: null,
                 success: false,
-                statusCode: 500,
-                error: error.message,
-            };
+            }, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     async getListOFHospitals() {
         try {
             const response = await this.hospitalServices.getListOfHospitals();
             return {
-                message: 'Hospital  list retrieved successfully',
+                message: 'Hospital list retrieved successfully',
                 data: response,
                 success: true,
-                statusCode: 201,
+                statusCode: common_1.HttpStatus.OK,
             };
         }
         catch (error) {
-            return {
+            console.error(error);
+            throw new common_1.HttpException({
                 message: 'Error fetching Hospitals',
                 data: null,
                 success: false,
-                statusCode: 500,
-                error: error.message,
+            }, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    async deleteHospital(id) {
+        try {
+            const deleted = await this.hospitalServices.deleteById(id);
+            if (!deleted) {
+                throw new common_1.HttpException('Hospital not found', common_1.HttpStatus.NOT_FOUND);
+            }
+            return {
+                message: 'Hospital deleted successfully',
+                data: deleted,
+                success: true,
+                statusCode: common_1.HttpStatus.OK,
             };
+        }
+        catch (error) {
+            console.error(error);
+            throw new common_1.HttpException({
+                message: error.message ||
+                    'Error deleting Hospital',
+                data: null,
+                success: false,
+            }, error.status ||
+                common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 };
@@ -77,6 +98,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], HospitalController.prototype, "getListOFHospitals", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], HospitalController.prototype, "deleteHospital", null);
 exports.HospitalController = HospitalController = __decorate([
     (0, common_1.Controller)('hospital'),
     __metadata("design:paramtypes", [hospital_service_1.HospitalService])

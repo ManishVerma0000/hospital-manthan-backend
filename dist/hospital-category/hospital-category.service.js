@@ -31,7 +31,8 @@ let HospitalCategoryService = class HospitalCategoryService {
         return response;
     }
     async deleteById(id) {
-        const response = await this.doctorModel.findByIdAndDelete(id).exec();
+        console.log(id, 'id');
+        const response = await this.doctorModel.findByIdAndDelete({ _id: id });
         return response;
     }
 };

@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { InsuranceCompanyService } from './insurance-company.service';
 import { CreateInsuranceCompanyDto } from './dto/insurance-company.dto';
-import { get } from 'http';
 
 @Controller('insurance-company')
 export class InsuranceCompanyController {

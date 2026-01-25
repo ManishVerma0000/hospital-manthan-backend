@@ -29,6 +29,13 @@ let CategoriesService = class CategoriesService {
     async findAll() {
         return this.categoryModel.find().exec();
     }
+    async deleteById(id) {
+        const deleted = await this.categoryModel.findByIdAndDelete(id);
+        if (!deleted) {
+            throw new common_1.NotFoundException('Category not found');
+        }
+        return deleted;
+    }
 };
 exports.CategoriesService = CategoriesService;
 exports.CategoriesService = CategoriesService = __decorate([

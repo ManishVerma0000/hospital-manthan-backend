@@ -34,4 +34,7 @@ export class HospitalService {
   getListOfHospitals(): any {
     return this.hospitalModel.find().exec();
   }
+  async deleteById(id: string) {
+    return this.hospitalModel.findByIdAndDelete(id);
+  }
 }

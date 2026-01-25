@@ -1,14 +1,28 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Param,
+} from '@nestjs/common';
+
 import { CreateCategoryDto } from './dto/categories.dto';
 import { CategoriesService } from './categories.service';
 
 @Controller('categories')
 export class CategoriesController {
-  constructor(private readonly categoryService: CategoriesService) {}
+  constructor(
+    private readonly categoryService: CategoriesService,
+  ) {}
+
+  /* ---------------- Create ---------------- */
   @Post()
   async create(@Body() requestBody: CreateCategoryDto): Promise<any> {
     try {
-      const response = await this.categoryService.create(requestBody);
+      const response =
+        await this.categoryService.create(requestBody);
+
       return {
         message: 'Category created successfully',
         data: response,
@@ -26,10 +40,13 @@ export class CategoriesController {
     }
   }
 
+  /* ---------------- List ---------------- */
   @Get('/list')
   async findAll(): Promise<any> {
     try {
-      const response = await this.categoryService.findAll();
+      const response =
+        await this.categoryService.findAll();
+
       return {
         message: 'Categories fetched successfully',
         data: response,
@@ -47,5 +64,27 @@ export class CategoriesController {
     }
   }
 
-  
+  /* ---------------- Delete ---------------- */
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<any> {
+    try {
+      const response =
+        await this.categoryService.deleteById(id);
+
+      return {
+        message: 'Category deleted successfully',
+        data: response,
+        success: true,
+        statusCode: 200,
+      };
+    } catch (error) {
+      return {
+        message: 'Error deleting category',
+        data: null,
+        success: false,
+        statusCode: 500,
+        error: error.message,
+      };
+    }
+  }
 }

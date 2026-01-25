@@ -28,18 +28,16 @@ let HospitalCategoryController = class HospitalCategoryController {
                 message: 'Hospital Category created successfully',
                 data: response,
                 success: true,
-                statusCode: 201,
+                statusCode: common_1.HttpStatus.CREATED,
             };
         }
         catch (error) {
-            console.log(error);
-            return {
+            console.error(error);
+            throw new common_1.HttpException({
                 message: 'Error creating Hospital Category',
-                data: null,
                 success: false,
-                statusCode: 500,
-                error: error.message,
-            };
+                data: null,
+            }, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     async findAll() {
@@ -49,36 +47,40 @@ let HospitalCategoryController = class HospitalCategoryController {
                 message: 'Hospital Category fetched successfully',
                 data: response,
                 success: true,
-                statusCode: 200,
+                statusCode: common_1.HttpStatus.OK,
             };
         }
         catch (error) {
-            return {
+            console.error(error);
+            throw new common_1.HttpException({
                 message: 'Error fetching Hospital Category',
-                data: null,
                 success: false,
-                statusCode: 500,
-                error: error.message,
-            };
+                data: null,
+            }, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     async delete(id) {
         try {
             const deleted = await this.hospitalCategoryService.deleteById(id);
+            if (!deleted) {
+                throw new common_1.HttpException('Hospital Category not found', common_1.HttpStatus.NOT_FOUND);
+            }
             return {
                 message: 'Hospital Category deleted successfully',
                 success: true,
                 data: deleted,
-                statusCode: 200,
+                statusCode: common_1.HttpStatus.OK,
             };
         }
         catch (error) {
-            return {
-                message: error.message || 'Error deleting Hospital Category',
+            console.error(error);
+            throw new common_1.HttpException({
+                message: error.message ||
+                    'Error deleting Hospital Category',
                 success: false,
                 data: null,
-                statusCode: 500,
-            };
+            }, error.status ||
+                common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 };

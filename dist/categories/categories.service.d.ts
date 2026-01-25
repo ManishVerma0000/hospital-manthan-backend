@@ -5,4 +5,9 @@ export declare class CategoriesService {
     constructor(categoryModel: Model<CategoriesDocument>);
     create(requestBody: any): Promise<Categories>;
     findAll(): Promise<Categories[]>;
+    deleteById(id: string): Promise<import("mongoose").Document<unknown, {}, CategoriesDocument, {}, {}> & Categories & import("mongoose").Document<import("mongoose").Types.ObjectId, any, any, Record<string, any>, {}> & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }> & {
+        __v: number;
+    }>;
 }

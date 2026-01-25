@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { SurgeryService } from './surgery.service';
 import { CreateSurgeryDto } from './dto/CreateSurgeryDto';
 
@@ -28,25 +28,29 @@ export class SurgeryController {
     }
   }
 
-
   @Get('/list')
-    async findAll(): Promise<any> {
-      try {
-        const response = await this.surgeryService.findAll();
-        return {
-          message: 'Government panels fetched successfully',
-          data: response,
-          success: true,
-          statusCode: 200,
-        };
-      } catch (error) {
-        return {
-          message: 'Error fetching government panels',
-          data: null,
-          success: false,
-          statusCode: 500,
-          error: error.message,
-        };
-      }
+  async findAll(): Promise<any> {
+    try {
+      const response = await this.surgeryService.findAll();
+      return {
+        message: 'Government panels fetched successfully',
+        data: response,
+        success: true,
+        statusCode: 200,
+      };
+    } catch (error) {
+      return {
+        message: 'Error fetching government panels',
+        data: null,
+        success: false,
+        statusCode: 500,
+        error: error.message,
+      };
     }
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string) {
+    return this.surgeryService.deleteById(id);
+  }
 }

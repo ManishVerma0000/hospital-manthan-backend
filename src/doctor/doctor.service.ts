@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Doctor, DoctorDocument } from './schema/doctor.schema';
 import { Model } from 'mongoose';
@@ -23,5 +23,16 @@ export class DoctorService {
         select: 'hospitalName city contactNumber email location', // optional
       })
       .exec();
+  }
+
+  async deleteById(id: string) {
+    const deleted =
+      await this.doctorModel.findByIdAndDelete(id);
+
+    if (!deleted) {
+      throw new NotFoundException('Doctor not found');
+    }
+
+    return deleted;
   }
 }

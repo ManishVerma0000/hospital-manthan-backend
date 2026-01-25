@@ -5,4 +5,5 @@ export declare class HospitalController {
     constructor(hospitalServices: HospitalService);
     create(requestBody: CreateHospitalDto): Promise<any>;
     getListOFHospitals(): Promise<any>;
+    deleteHospital(id: string): Promise<any>;
 }

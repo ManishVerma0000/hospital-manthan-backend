@@ -35,6 +35,13 @@ let DoctorService = class DoctorService {
         })
             .exec();
     }
+    async deleteById(id) {
+        const deleted = await this.doctorModel.findByIdAndDelete(id);
+        if (!deleted) {
+            throw new common_1.NotFoundException('Doctor not found');
+        }
+        return deleted;
+    }
 };
 exports.DoctorService = DoctorService;
 exports.DoctorService = DoctorService = __decorate([
