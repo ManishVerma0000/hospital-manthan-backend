@@ -42,6 +42,9 @@ let DoctorService = class DoctorService {
         }
         return deleted;
     }
+    async getDoctorDetails(id) {
+        return await this.doctorModel.findOne({ _id: id });
+    }
 };
 exports.DoctorService = DoctorService;
 exports.DoctorService = DoctorService = __decorate([

@@ -115,4 +115,25 @@ export class HospitalController {
       );
     }
   }
+  
+  @Get(':id')
+  async getSurgery(@Param('id') id: string) {
+    try {
+      const response = await this.hospitalServices.getHospitalDetails(id);
+      return {
+        message: 'Hospital Details  fetched successfully',
+        data: response,
+        success: true,
+        statusCode: 200,
+      };
+    } catch (error) {
+      return {
+        message: 'Error fetching Hospital details',
+        data: null,
+        success: false,
+        statusCode: 500,
+        error: error.message,
+      };
+    }
+  }
 }

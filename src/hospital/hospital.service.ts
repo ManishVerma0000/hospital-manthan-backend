@@ -37,4 +37,8 @@ export class HospitalService {
   async deleteById(id: string) {
     return this.hospitalModel.findByIdAndDelete(id);
   }
+
+  async getHospitalDetails(id: string) {
+    return await this.hospitalModel.findOne({ _id: id });
+  }
 }

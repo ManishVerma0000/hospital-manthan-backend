@@ -55,6 +55,9 @@ let SurgeryService = class SurgeryService {
     async deleteById(id) {
         return this.surgeryModel.findByIdAndDelete(id);
     }
+    async getSurgeryDetails(id) {
+        return await this.surgeryModel.findOne({ _id: id });
+    }
 };
 exports.SurgeryService = SurgeryService;
 exports.SurgeryService = SurgeryService = __decorate([

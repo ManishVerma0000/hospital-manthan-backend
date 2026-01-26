@@ -46,4 +46,8 @@ export class SurgeryService {
   async deleteById(id: string) {
     return this.surgeryModel.findByIdAndDelete(id);
   }
+
+  async getSurgeryDetails(id: string) {
+    return await this.surgeryModel.findOne({ _id: id });
+  }
 }

@@ -65,6 +65,26 @@ let SurgeryController = class SurgeryController {
     async delete(id) {
         return this.surgeryService.deleteById(id);
     }
+    async getSurgery(id) {
+        try {
+            const response = await this.surgeryService.getSurgeryDetails(id);
+            return {
+                message: 'Surgery Details  fetched successfully',
+                data: response,
+                success: true,
+                statusCode: 200,
+            };
+        }
+        catch (error) {
+            return {
+                message: 'Error fetching Surgery details',
+                data: null,
+                success: false,
+                statusCode: 500,
+                error: error.message,
+            };
+        }
+    }
 };
 exports.SurgeryController = SurgeryController;
 __decorate([
@@ -87,6 +107,13 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], SurgeryController.prototype, "delete", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], SurgeryController.prototype, "getSurgery", null);
 exports.SurgeryController = SurgeryController = __decorate([
     (0, common_1.Controller)('surgery'),
     __metadata("design:paramtypes", [surgery_service_1.SurgeryService])

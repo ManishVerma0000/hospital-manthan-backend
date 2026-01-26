@@ -41,6 +41,9 @@ let HospitalService = class HospitalService {
     async deleteById(id) {
         return this.hospitalModel.findByIdAndDelete(id);
     }
+    async getHospitalDetails(id) {
+        return await this.hospitalModel.findOne({ _id: id });
+    }
 };
 exports.HospitalService = HospitalService;
 exports.HospitalService = HospitalService = __decorate([

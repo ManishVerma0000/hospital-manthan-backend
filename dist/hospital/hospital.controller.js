@@ -83,6 +83,26 @@ let HospitalController = class HospitalController {
                 common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    async getSurgery(id) {
+        try {
+            const response = await this.hospitalServices.getHospitalDetails(id);
+            return {
+                message: 'Hospital Details  fetched successfully',
+                data: response,
+                success: true,
+                statusCode: 200,
+            };
+        }
+        catch (error) {
+            return {
+                message: 'Error fetching Hospital details',
+                data: null,
+                success: false,
+                statusCode: 500,
+                error: error.message,
+            };
+        }
+    }
 };
 exports.HospitalController = HospitalController;
 __decorate([
@@ -105,6 +125,13 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], HospitalController.prototype, "deleteHospital", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], HospitalController.prototype, "getSurgery", null);
 exports.HospitalController = HospitalController = __decorate([
     (0, common_1.Controller)('hospital'),
     __metadata("design:paramtypes", [hospital_service_1.HospitalService])

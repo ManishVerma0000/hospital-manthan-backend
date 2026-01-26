@@ -111,4 +111,25 @@ export class DoctorController {
       );
     }
   }
+
+  @Get(':id')
+  async getSurgery(@Param('id') id: string) {
+    try {
+      const response = await this.doctorService.getDoctorDetails(id);
+      return {
+        message: 'Doctor Details  fetched successfully',
+        data: response,
+        success: true,
+        statusCode: 200,
+      };
+    } catch (error) {
+      return {
+        message: 'Error fetching Doctor details',
+        data: null,
+        success: false,
+        statusCode: 500,
+        error: error.message,
+      };
+    }
+  }
 }

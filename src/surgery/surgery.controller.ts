@@ -53,4 +53,25 @@ export class SurgeryController {
   async delete(@Param('id') id: string) {
     return this.surgeryService.deleteById(id);
   }
+
+  @Get(':id')
+  async getSurgery(@Param('id') id: string) {
+    try {
+      const response = await this.surgeryService.getSurgeryDetails(id);
+      return {
+        message: 'Surgery Details  fetched successfully',
+        data: response,
+        success: true,
+        statusCode: 200,
+      };
+    } catch (error) {
+      return {
+        message: 'Error fetching Surgery details',
+        data: null,
+        success: false,
+        statusCode: 500,
+        error: error.message,
+      };
+    }
+  }
 }

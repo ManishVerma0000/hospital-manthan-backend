@@ -35,4 +35,8 @@ export class DoctorService {
 
     return deleted;
   }
+
+  async getDoctorDetails(id: string) {
+    return await this.doctorModel.findOne({ _id: id });
+  }
 }

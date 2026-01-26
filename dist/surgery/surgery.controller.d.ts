@@ -30,4 +30,21 @@ export declare class SurgeryController {
     }> & {
         __v: number;
     }) | null>;
+    getSurgery(id: string): Promise<{
+        message: string;
+        data: (import("mongoose").Document<unknown, {}, import("./schema/surgery.schema").SurgeryDocument, {}, {}> & import("./schema/surgery.schema").Surgery & import("mongoose").Document<import("mongoose").Types.ObjectId, any, any, Record<string, any>, {}> & Required<{
+            _id: import("mongoose").Types.ObjectId;
+        }> & {
+            __v: number;
+        }) | null;
+        success: boolean;
+        statusCode: number;
+        error?: undefined;
+    } | {
+        message: string;
+        data: null;
+        success: boolean;
+        statusCode: number;
+        error: any;
+    }>;
 }
