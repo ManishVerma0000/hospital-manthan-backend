@@ -26,8 +26,7 @@ export class DoctorService {
   }
 
   async deleteById(id: string) {
-    const deleted =
-      await this.doctorModel.findByIdAndDelete(id);
+    const deleted = await this.doctorModel.findByIdAndDelete(id);
 
     if (!deleted) {
       throw new NotFoundException('Doctor not found');
@@ -37,6 +36,14 @@ export class DoctorService {
   }
 
   async getDoctorDetails(id: string) {
-    return await this.doctorModel.findOne({ _id: id });
+    return await this.doctorModel
+      .findById(id)
+      .populate('hospital') // 👈 This fetches hospital details
+      .exec();
+  }
+
+  async getDoctorsByHospital(hospitalId: string) {
+    return await this.doctorModel
+      .find({ hospital: hospitalId }) // 🔥 filter by hospital id
   }
 }

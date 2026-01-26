@@ -16,4 +16,9 @@ export declare class DoctorService {
     }> & {
         __v: number;
     }) | null>;
+    getDoctorsByHospital(hospitalId: string): Promise<(import("mongoose").Document<unknown, {}, DoctorDocument, {}, {}> & Doctor & import("mongoose").Document<import("mongoose").Types.ObjectId, any, any, Record<string, any>, {}> & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }> & {
+        __v: number;
+    })[]>;
 }

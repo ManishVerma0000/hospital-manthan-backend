@@ -100,6 +100,26 @@ let DoctorController = class DoctorController {
             };
         }
     }
+    async getDoctorsByHospital(hospitalId) {
+        try {
+            const response = await this.doctorService.getDoctorsByHospital(hospitalId);
+            return {
+                message: 'Doctors fetched successfully',
+                data: response,
+                success: true,
+                statusCode: 200,
+            };
+        }
+        catch (error) {
+            return {
+                message: 'Error fetching doctors',
+                data: null,
+                success: false,
+                statusCode: 500,
+                error: error.message,
+            };
+        }
+    }
 };
 exports.DoctorController = DoctorController;
 __decorate([
@@ -129,6 +149,13 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], DoctorController.prototype, "getSurgery", null);
+__decorate([
+    (0, common_1.Get)('hospital/:hospitalId'),
+    __param(0, (0, common_1.Param)('hospitalId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], DoctorController.prototype, "getDoctorsByHospital", null);
 exports.DoctorController = DoctorController = __decorate([
     (0, common_1.Controller)('doctor'),
     __metadata("design:paramtypes", [doctor_service_1.DoctorService])

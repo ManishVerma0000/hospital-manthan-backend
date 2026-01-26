@@ -94,6 +94,7 @@ export class DoctorController {
   @Get(':id')
   async getSurgery(@Param('id') id: string) {
     try {
+      
       const response = await this.doctorService.getDoctorDetails(id);
       return {
         message: 'Doctor Details  fetched successfully',
@@ -104,6 +105,28 @@ export class DoctorController {
     } catch (error) {
       return {
         message: 'Error fetching Doctor details',
+        data: null,
+        success: false,
+        statusCode: 500,
+        error: error.message,
+      };
+    }
+  }
+
+  @Get('hospital/:hospitalId')
+  async getDoctorsByHospital(@Param('hospitalId') hospitalId: string) {
+    try {
+      const response =
+        await this.doctorService.getDoctorsByHospital(hospitalId);
+      return {
+        message: 'Doctors fetched successfully',
+        data: response,
+        success: true,
+        statusCode: 200,
+      };
+    } catch (error) {
+      return {
+        message: 'Error fetching doctors',
         data: null,
         success: false,
         statusCode: 500,

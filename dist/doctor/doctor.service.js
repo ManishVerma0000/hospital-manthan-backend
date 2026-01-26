@@ -43,7 +43,14 @@ let DoctorService = class DoctorService {
         return deleted;
     }
     async getDoctorDetails(id) {
-        return await this.doctorModel.findOne({ _id: id });
+        return await this.doctorModel
+            .findById(id)
+            .populate('hospital')
+            .exec();
+    }
+    async getDoctorsByHospital(hospitalId) {
+        return await this.doctorModel
+            .find({ hospital: hospitalId });
     }
 };
 exports.DoctorService = DoctorService;
