@@ -6,26 +6,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SurgeryModule = void 0;
+exports.TreatedByModule = void 0;
 const common_1 = require("@nestjs/common");
-const surgery_controller_1 = require("./surgery.controller");
-const surgery_service_1 = require("./surgery.service");
+const treated_by_controller_1 = require("./treated-by.controller");
+const treated_by_service_1 = require("./treated-by.service");
+const conn_1 = require("../db/conn");
 const mongoose_1 = require("@nestjs/mongoose");
-const surgery_schema_1 = require("./schema/surgery.schema");
-const treated_by_schema_1 = require("../treated-by/schema/treated.by.schema");
-let SurgeryModule = class SurgeryModule {
+const treated_by_schema_1 = require("./schema/treated.by.schema");
+let TreatedByModule = class TreatedByModule {
 };
-exports.SurgeryModule = SurgeryModule;
-exports.SurgeryModule = SurgeryModule = __decorate([
+exports.TreatedByModule = TreatedByModule;
+exports.TreatedByModule = TreatedByModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            conn_1.DatabaseModule,
             mongoose_1.MongooseModule.forFeature([
-                { name: surgery_schema_1.Surgery.name, schema: surgery_schema_1.SurgerySchema },
                 { name: treated_by_schema_1.TreatedBy.name, schema: treated_by_schema_1.TreatedBySchema },
             ]),
         ],
-        controllers: [surgery_controller_1.SurgeryController],
-        providers: [surgery_service_1.SurgeryService]
+        controllers: [treated_by_controller_1.TreatedByController],
+        providers: [treated_by_service_1.TreatedByService],
     })
-], SurgeryModule);
-//# sourceMappingURL=surgery.module.js.map
+], TreatedByModule);
+//# sourceMappingURL=treated-by.module.js.map

@@ -25,6 +25,7 @@ const book_appointment_module_1 = require("./book-appointment/book-appointment.m
 const contact_us_module_1 = require("./contact-us/contact-us.module");
 const admin_module_1 = require("./admin/admin.module");
 const surgery_module_1 = require("./surgery/surgery.module");
+const treated_by_module_1 = require("./treated-by/treated-by.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(upload_middleware_1.UploadMiddleware).forRoutes('upload-image');
@@ -41,7 +42,7 @@ exports.AppModule = AppModule = __decorate([
                 useFactory: async (configService) => ({
                     uri: configService.get('MONGO_URI')
                 }),
-            }), doctor_module_1.DoctorModule, categories_module_1.CategoriesModule, upload_images_module_1.UploadImagesModule, hospital_module_1.HospitalModule, hospital_category_module_1.HospitalCategoryModule, insurance_company_module_1.InsuranceCompanyModule, cashless_insurance_company_module_1.CashlessInsuranceCompanyModule, goverment_panel_module_1.GovermentPanelModule, book_appointment_module_1.BookAppointmentModule, contact_us_module_1.ContactUsModule, admin_module_1.AdminModule, surgery_module_1.SurgeryModule,
+            }), doctor_module_1.DoctorModule, categories_module_1.CategoriesModule, upload_images_module_1.UploadImagesModule, hospital_module_1.HospitalModule, hospital_category_module_1.HospitalCategoryModule, insurance_company_module_1.InsuranceCompanyModule, cashless_insurance_company_module_1.CashlessInsuranceCompanyModule, goverment_panel_module_1.GovermentPanelModule, book_appointment_module_1.BookAppointmentModule, contact_us_module_1.ContactUsModule, admin_module_1.AdminModule, surgery_module_1.SurgeryModule, treated_by_module_1.TreatedByModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

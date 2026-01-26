@@ -7,6 +7,7 @@ export class CreateSurgeryDto {
   recoveryTime: string;
   treatedBy: string;
   costingRange: string;
+  paragraph: string;
 
   // IMAGES
   icon?: string;

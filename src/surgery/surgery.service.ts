@@ -3,6 +3,7 @@ import { CreateSurgeryDto } from './dto/CreateSurgeryDto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Surgery, SurgeryDocument } from './schema/surgery.schema';
 import { Model } from 'mongoose';
+import { TreatedByDocument } from 'src/treated-by/schema/treated.by.schema';
 @Injectable()
 export class SurgeryService {
   constructor(
@@ -48,6 +49,9 @@ export class SurgeryService {
   }
 
   async getSurgeryDetails(id: string) {
-    return await this.surgeryModel.findOne({ _id: id });
+    return this.surgeryModel
+      .findById(id)
+      .populate('treatedBy', 'treatedByName') // 👈 only fetch name
+      .exec();
   }
 }

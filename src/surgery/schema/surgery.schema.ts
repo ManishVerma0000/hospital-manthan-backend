@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export type SurgeryDocument = Surgery & Document;
 
@@ -8,6 +8,9 @@ export class Surgery {
   // BASIC DETAILS
   @Prop({ required: true })
   surgeryName: string;
+
+  @Prop({ required: true })
+  paragraph: string;
 
   @Prop()
   diseaseNeme?: string;
@@ -21,8 +24,12 @@ export class Surgery {
   @Prop({ required: true })
   recoveryTime: string;
 
-  @Prop({ required: true })
-  treatedBy: string;
+  @Prop({
+    type: Types.ObjectId,
+    ref: 'TreatedBy', // 👈 Must match model name
+    required: true,
+  })
+  treatedBy: Types.ObjectId;
 
   @Prop({ required: true })
   costingRange: string;

@@ -1,12 +1,13 @@
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 export type SurgeryDocument = Surgery & Document;
 export declare class Surgery {
     surgeryName: string;
+    paragraph: string;
     diseaseNeme?: string;
     surgeryCategory: string;
     duration: string;
     recoveryTime: string;
-    treatedBy: string;
+    treatedBy: Types.ObjectId;
     costingRange: string;
     icon?: string;
     images?: string[];
@@ -33,11 +34,11 @@ export declare class Surgery {
     }[];
 }
 export declare const SurgerySchema: import("mongoose").Schema<Surgery, import("mongoose").Model<Surgery, any, any, any, Document<unknown, any, Surgery, any, {}> & Surgery & {
-    _id: import("mongoose").Types.ObjectId;
+    _id: Types.ObjectId;
 } & {
     __v: number;
 }, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Surgery, Document<unknown, {}, import("mongoose").FlatRecord<Surgery>, {}, import("mongoose").ResolveSchemaOptions<import("mongoose").DefaultSchemaOptions>> & import("mongoose").FlatRecord<Surgery> & {
-    _id: import("mongoose").Types.ObjectId;
+    _id: Types.ObjectId;
 } & {
     __v: number;
 }>;

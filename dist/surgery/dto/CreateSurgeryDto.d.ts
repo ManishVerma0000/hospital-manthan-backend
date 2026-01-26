@@ -6,6 +6,7 @@ export declare class CreateSurgeryDto {
     recoveryTime: string;
     treatedBy: string;
     costingRange: string;
+    paragraph: string;
     icon?: string;
     images?: string[];
     symptoms?: SymptomDto[];

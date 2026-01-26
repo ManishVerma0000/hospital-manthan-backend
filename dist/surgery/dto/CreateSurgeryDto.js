@@ -9,6 +9,7 @@ class CreateSurgeryDto {
     recoveryTime;
     treatedBy;
     costingRange;
+    paragraph;
     icon;
     images;
     symptoms;
