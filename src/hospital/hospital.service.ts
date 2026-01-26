@@ -39,6 +39,13 @@ export class HospitalService {
   }
 
   async getHospitalDetails(id: string) {
-    return await this.hospitalModel.findOne({ _id: id });
+    return await this.hospitalModel
+      .findById(id)
+      // Populate Relations
+      .populate('treatmentList') // InsuranceCompany
+      .populate('cashlessList') // CashlessInsuranceCompany
+      .populate('panelList') // GovernmentPanel
+      .populate('hospitalType') // Category (if ref added)
+      .exec();
   }
 }

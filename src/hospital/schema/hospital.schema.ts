@@ -1,5 +1,5 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, Types } from "mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document, Types } from 'mongoose';
 
 export type HospitalDocument = Hospital & Document;
 
@@ -7,6 +7,9 @@ export type HospitalDocument = Hospital & Document;
 export class Hospital {
   @Prop({ required: true })
   hospitalName: string;
+
+  @Prop({ required: true })
+  hospitaldetails: string;
 
   @Prop({ type: Types.ObjectId, required: true })
   hospitalType: Types.ObjectId;
@@ -35,6 +38,9 @@ export class Hospital {
   @Prop({ type: [String], default: [] })
   imageUrls: string[];
 
+  @Prop({ type: [String], default: [] })
+  firstStepImageUrls: string[];
+
   @Prop({
     type: [
       {
@@ -50,13 +56,17 @@ export class Hospital {
   }[];
 
   // ---------- STEP 2 ----------
-  @Prop({ type: [Types.ObjectId], ref: "InsuranceCompany", default: [] })
+  @Prop({ type: [Types.ObjectId], ref: 'InsuranceCompany', default: [] })
   treatmentList: Types.ObjectId[];
 
-  @Prop({ type: [Types.ObjectId], ref: "CashlessInsuranceCompany", default: [] })
+  @Prop({
+    type: [Types.ObjectId],
+    ref: 'CashlessInsurance',
+    default: [],
+  })
   cashlessList: Types.ObjectId[];
 
-  @Prop({ type: [Types.ObjectId], ref: "GovernmentPanel", default: [] })
+  @Prop({ type: [Types.ObjectId], ref: 'GovermentPanel', default: [] })
   panelList: Types.ObjectId[];
 }
 

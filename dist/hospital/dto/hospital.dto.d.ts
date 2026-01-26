@@ -4,6 +4,7 @@ declare class TimingDto {
 }
 export declare class CreateHospitalDto {
     hospitalName: string;
+    hospitaldetails: string;
     hospitalType: string;
     contactNumber: string;
     whatsapp: string;
@@ -13,6 +14,7 @@ export declare class CreateHospitalDto {
     location: string;
     iconUrl?: string;
     imageUrls: string[];
+    firstStepImageUrls: string[];
     timings: TimingDto[];
     treatmentList: string[];
     cashlessList: string[];

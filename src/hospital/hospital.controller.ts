@@ -14,21 +14,13 @@ import { CreateHospitalDto } from './dto/hospital.dto';
 
 @Controller('hospital')
 export class HospitalController {
-  constructor(
-    private readonly hospitalServices: HospitalService,
-  ) {}
+  constructor(private readonly hospitalServices: HospitalService) {}
 
   /* ---------------- Create ---------------- */
   @Post()
-  async create(
-    @Body() requestBody: CreateHospitalDto,
-  ): Promise<any> {
+  async create(@Body() requestBody: CreateHospitalDto): Promise<any> {
     try {
-      const response =
-        await this.hospitalServices.create(
-          requestBody,
-        );
-
+      const response = await this.hospitalServices.create(requestBody);
       return {
         message: 'Hospital created successfully',
         data: response,
@@ -53,12 +45,10 @@ export class HospitalController {
   @Get('/list')
   async getListOFHospitals(): Promise<any> {
     try {
-      const response =
-        await this.hospitalServices.getListOfHospitals();
+      const response = await this.hospitalServices.getListOfHospitals();
 
       return {
-        message:
-          'Hospital list retrieved successfully',
+        message: 'Hospital list retrieved successfully',
         data: response,
         success: true,
         statusCode: HttpStatus.OK,
@@ -79,20 +69,12 @@ export class HospitalController {
 
   /* ---------------- Delete ---------------- */
   @Delete(':id')
-  async deleteHospital(
-    @Param('id') id: string,
-  ): Promise<any> {
+  async deleteHospital(@Param('id') id: string): Promise<any> {
     try {
-      const deleted =
-        await this.hospitalServices.deleteById(id);
-
+      const deleted = await this.hospitalServices.deleteById(id);
       if (!deleted) {
-        throw new HttpException(
-          'Hospital not found',
-          HttpStatus.NOT_FOUND,
-        );
+        throw new HttpException('Hospital not found', HttpStatus.NOT_FOUND);
       }
-
       return {
         message: 'Hospital deleted successfully',
         data: deleted,
@@ -101,25 +83,22 @@ export class HospitalController {
       };
     } catch (error) {
       console.error(error);
-
       throw new HttpException(
         {
-          message:
-            error.message ||
-            'Error deleting Hospital',
+          message: error.message || 'Error deleting Hospital',
           data: null,
           success: false,
         },
-        error.status ||
-          HttpStatus.INTERNAL_SERVER_ERROR,
+        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }
-  
+
   @Get(':id')
   async getSurgery(@Param('id') id: string) {
     try {
       const response = await this.hospitalServices.getHospitalDetails(id);
+      // console.log(response)
       return {
         message: 'Hospital Details  fetched successfully',
         data: response,
@@ -127,6 +106,7 @@ export class HospitalController {
         statusCode: 200,
       };
     } catch (error) {
+      console.log(error,'error')
       return {
         message: 'Error fetching Hospital details',
         data: null,

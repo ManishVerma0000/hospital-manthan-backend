@@ -26,6 +26,7 @@ __decorate([
 ], TimingDto.prototype, "time", void 0);
 class CreateHospitalDto {
     hospitalName;
+    hospitaldetails;
     hospitalType;
     contactNumber;
     whatsapp;
@@ -35,6 +36,7 @@ class CreateHospitalDto {
     location;
     iconUrl;
     imageUrls;
+    firstStepImageUrls;
     timings;
     treatmentList;
     cashlessList;
@@ -46,6 +48,11 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateHospitalDto.prototype, "hospitalName", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CreateHospitalDto.prototype, "hospitaldetails", void 0);
 __decorate([
     (0, class_validator_1.IsMongoId)(),
     __metadata("design:type", String)
@@ -84,6 +91,11 @@ __decorate([
     (0, class_validator_1.IsString)({ each: true }),
     __metadata("design:type", Array)
 ], CreateHospitalDto.prototype, "imageUrls", void 0);
+__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], CreateHospitalDto.prototype, "firstStepImageUrls", void 0);
 __decorate([
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.ValidateNested)({ each: true }),

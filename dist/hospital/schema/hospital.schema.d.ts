@@ -1,7 +1,8 @@
-import { Document, Types } from "mongoose";
+import { Document, Types } from 'mongoose';
 export type HospitalDocument = Hospital & Document;
 export declare class Hospital {
     hospitalName: string;
+    hospitaldetails: string;
     hospitalType: Types.ObjectId;
     contactNumber: string;
     whatsapp: string;
@@ -11,6 +12,7 @@ export declare class Hospital {
     location: string;
     iconUrl: string;
     imageUrls: string[];
+    firstStepImageUrls: string[];
     timings: {
         days: string;
         time: string;

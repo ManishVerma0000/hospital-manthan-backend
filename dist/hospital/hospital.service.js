@@ -42,7 +42,13 @@ let HospitalService = class HospitalService {
         return this.hospitalModel.findByIdAndDelete(id);
     }
     async getHospitalDetails(id) {
-        return await this.hospitalModel.findOne({ _id: id });
+        return await this.hospitalModel
+            .findById(id)
+            .populate('treatmentList')
+            .populate('cashlessList')
+            .populate('panelList')
+            .populate('hospitalType')
+            .exec();
     }
 };
 exports.HospitalService = HospitalService;

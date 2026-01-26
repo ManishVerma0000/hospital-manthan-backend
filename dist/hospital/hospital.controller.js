@@ -75,12 +75,10 @@ let HospitalController = class HospitalController {
         catch (error) {
             console.error(error);
             throw new common_1.HttpException({
-                message: error.message ||
-                    'Error deleting Hospital',
+                message: error.message || 'Error deleting Hospital',
                 data: null,
                 success: false,
-            }, error.status ||
-                common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+            }, error.status || common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     async getSurgery(id) {
@@ -94,6 +92,7 @@ let HospitalController = class HospitalController {
             };
         }
         catch (error) {
+            console.log(error, 'error');
             return {
                 message: 'Error fetching Hospital details',
                 data: null,

@@ -13,6 +13,9 @@ const hospital_service_1 = require("./hospital.service");
 const conn_1 = require("../db/conn");
 const mongoose_1 = require("@nestjs/mongoose");
 const hospital_schema_1 = require("./schema/hospital.schema");
+const insurance_company_schema_1 = require("../insurance-company/schema/insurance-company.schema");
+const cashless_insurance_schema_1 = require("../cashless-insurance-company/schema/cashless-insurance.schema");
+const government_panel_schema_1 = require("../goverment-panel/schema/government-panel.schema");
 let HospitalModule = class HospitalModule {
 };
 exports.HospitalModule = HospitalModule;
@@ -22,6 +25,18 @@ exports.HospitalModule = HospitalModule = __decorate([
             conn_1.DatabaseModule,
             mongoose_1.MongooseModule.forFeature([
                 { name: hospital_schema_1.Hospital.name, schema: hospital_schema_1.HospitalSchema },
+                {
+                    name: insurance_company_schema_1.InsuranceCompany.name,
+                    schema: insurance_company_schema_1.InsuranceCompanySchema,
+                },
+                {
+                    name: cashless_insurance_schema_1.CashlessInsurance.name,
+                    schema: cashless_insurance_schema_1.CashlessInsuranceSchema,
+                },
+                {
+                    name: government_panel_schema_1.GovermentPanel.name,
+                    schema: government_panel_schema_1.GovermentPanelSchema,
+                },
             ]),
         ],
         controllers: [hospital_controller_1.HospitalController],

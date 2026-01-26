@@ -6,8 +6,8 @@ import {
   IsOptional,
   IsString,
   ValidateNested,
-} from "class-validator";
-import { Type } from "class-transformer";
+} from 'class-validator';
+import { Type } from 'class-transformer';
 
 class TimingDto {
   @IsString()
@@ -21,6 +21,10 @@ export class CreateHospitalDto {
   @IsString()
   @IsNotEmpty()
   hospitalName: string;
+
+  @IsString()
+  @IsNotEmpty()
+  hospitaldetails: string;
 
   @IsMongoId()
   hospitalType: string;
@@ -50,6 +54,11 @@ export class CreateHospitalDto {
   @IsArray()
   @IsString({ each: true })
   imageUrls: string[];
+
+  @IsArray()
+  @IsString({ each: true })
+  // imageUrls: string[];
+  firstStepImageUrls: string[];
 
   @IsArray()
   @ValidateNested({ each: true })

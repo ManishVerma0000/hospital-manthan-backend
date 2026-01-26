@@ -14,6 +14,7 @@ const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 let Hospital = class Hospital {
     hospitalName;
+    hospitaldetails;
     hospitalType;
     contactNumber;
     whatsapp;
@@ -23,6 +24,7 @@ let Hospital = class Hospital {
     location;
     iconUrl;
     imageUrls;
+    firstStepImageUrls;
     timings;
     treatmentList;
     cashlessList;
@@ -33,6 +35,10 @@ __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Hospital.prototype, "hospitalName", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], Hospital.prototype, "hospitaldetails", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ type: mongoose_2.Types.ObjectId, required: true }),
     __metadata("design:type", mongoose_2.Types.ObjectId)
@@ -70,6 +76,10 @@ __decorate([
     __metadata("design:type", Array)
 ], Hospital.prototype, "imageUrls", void 0);
 __decorate([
+    (0, mongoose_1.Prop)({ type: [String], default: [] }),
+    __metadata("design:type", Array)
+], Hospital.prototype, "firstStepImageUrls", void 0);
+__decorate([
     (0, mongoose_1.Prop)({
         type: [
             {
@@ -82,15 +92,19 @@ __decorate([
     __metadata("design:type", Array)
 ], Hospital.prototype, "timings", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: [mongoose_2.Types.ObjectId], ref: "InsuranceCompany", default: [] }),
+    (0, mongoose_1.Prop)({ type: [mongoose_2.Types.ObjectId], ref: 'InsuranceCompany', default: [] }),
     __metadata("design:type", Array)
 ], Hospital.prototype, "treatmentList", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: [mongoose_2.Types.ObjectId], ref: "CashlessInsuranceCompany", default: [] }),
+    (0, mongoose_1.Prop)({
+        type: [mongoose_2.Types.ObjectId],
+        ref: 'CashlessInsurance',
+        default: [],
+    }),
     __metadata("design:type", Array)
 ], Hospital.prototype, "cashlessList", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: [mongoose_2.Types.ObjectId], ref: "GovernmentPanel", default: [] }),
+    (0, mongoose_1.Prop)({ type: [mongoose_2.Types.ObjectId], ref: 'GovermentPanel', default: [] }),
     __metadata("design:type", Array)
 ], Hospital.prototype, "panelList", void 0);
 exports.Hospital = Hospital = __decorate([
