@@ -14,6 +14,7 @@ const class_transformer_1 = require("class-transformer");
 const class_validator_1 = require("class-validator");
 class CreateDoctorDto {
     hospital;
+    name;
     contactNumber;
     whatsAppNumber;
     treatmentProvide;
@@ -21,6 +22,7 @@ class CreateDoctorDto {
     workingFrom;
     qualificationAndExperience;
     about;
+    status;
     imageUrl;
 }
 exports.CreateDoctorDto = CreateDoctorDto;
@@ -29,6 +31,11 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateDoctorDto.prototype, "hospital", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], CreateDoctorDto.prototype, "name", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
@@ -65,6 +72,11 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateDoctorDto.prototype, "about", void 0);
+__decorate([
+    (0, class_validator_1.IsBoolean)({ each: true }),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Boolean)
+], CreateDoctorDto.prototype, "status", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),

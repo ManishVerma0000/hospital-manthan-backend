@@ -6,12 +6,17 @@ import {
   IsOptional,
   IsUrl,
   ValidateNested,
+  IsBoolean,
 } from 'class-validator';
 
 export class CreateDoctorDto {
   @IsString()
   @IsNotEmpty()
   hospital: string;
+
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 
   @IsString()
   @IsNotEmpty()
@@ -41,6 +46,10 @@ export class CreateDoctorDto {
   @IsString({ each: true })
   @IsNotEmpty()
   about: string;
+
+  @IsBoolean({ each: true })
+  @IsNotEmpty()
+  status: boolean;
 
   @IsString()
   @IsNotEmpty()

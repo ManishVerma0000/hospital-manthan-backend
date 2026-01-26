@@ -14,19 +14,13 @@ import { CreateDoctorDto } from './dto/doctor.dto';
 
 @Controller('doctor')
 export class DoctorController {
-  constructor(
-    private readonly doctorService: DoctorService,
-  ) {}
+  constructor(private readonly doctorService: DoctorService) {}
 
   /* ---------------- Create ---------------- */
   @Post()
-  async create(
-    @Body() requestBody: CreateDoctorDto,
-  ): Promise<any> {
+  async create(@Body() requestBody: CreateDoctorDto): Promise<any> {
     try {
-      const response =
-        await this.doctorService.create(requestBody);
-
+      const response = await this.doctorService.create(requestBody);
       return {
         message: 'Doctor created successfully',
         data: response,
@@ -51,9 +45,7 @@ export class DoctorController {
   @Get('/list')
   async getDoctorList(): Promise<any> {
     try {
-      const response =
-        await this.doctorService.findAll();
-
+      const response = await this.doctorService.findAll();
       return {
         message: 'Doctor list fetched successfully',
         data: response,
@@ -62,7 +54,6 @@ export class DoctorController {
       };
     } catch (error) {
       console.error(error);
-
       throw new HttpException(
         {
           message: 'Error fetching doctors',
@@ -76,20 +67,12 @@ export class DoctorController {
 
   /* ---------------- Delete ---------------- */
   @Delete(':id')
-  async deleteDoctor(
-    @Param('id') id: string,
-  ): Promise<any> {
+  async deleteDoctor(@Param('id') id: string): Promise<any> {
     try {
-      const deleted =
-        await this.doctorService.deleteById(id);
-
+      const deleted = await this.doctorService.deleteById(id);
       if (!deleted) {
-        throw new HttpException(
-          'Doctor not found',
-          HttpStatus.NOT_FOUND,
-        );
+        throw new HttpException('Doctor not found', HttpStatus.NOT_FOUND);
       }
-
       return {
         message: 'Doctor deleted successfully',
         data: deleted,
@@ -97,17 +80,13 @@ export class DoctorController {
         statusCode: HttpStatus.OK,
       };
     } catch (error) {
-      console.error(error);
-
       throw new HttpException(
         {
-          message:
-            error.message || 'Error deleting doctor',
+          message: error.message || 'Error deleting doctor',
           data: null,
           success: false,
         },
-        error.status ||
-          HttpStatus.INTERNAL_SERVER_ERROR,
+        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }

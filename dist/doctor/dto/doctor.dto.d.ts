@@ -1,5 +1,6 @@
 export declare class CreateDoctorDto {
     hospital: string;
+    name: string;
     contactNumber: string;
     whatsAppNumber: string;
     treatmentProvide: string;
@@ -7,6 +8,7 @@ export declare class CreateDoctorDto {
     workingFrom: string;
     qualificationAndExperience: string;
     about: string;
+    status: boolean;
     imageUrl: string;
 }
 export declare class TimingDto {

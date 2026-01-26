@@ -3,7 +3,9 @@ export type DoctorDocument = Doctor & Document;
 export declare class Doctor {
     hospital: Types.ObjectId;
     contactNumber: string;
+    name: string;
     whatsAppNumber: string;
+    status: boolean;
     treatmentProvide: string[];
     timings: {
         day: string;

@@ -73,13 +73,11 @@ let DoctorController = class DoctorController {
             };
         }
         catch (error) {
-            console.error(error);
             throw new common_1.HttpException({
                 message: error.message || 'Error deleting doctor',
                 data: null,
                 success: false,
-            }, error.status ||
-                common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+            }, error.status || common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     async getSurgery(id) {

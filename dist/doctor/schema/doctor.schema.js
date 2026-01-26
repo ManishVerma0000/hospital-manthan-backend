@@ -15,7 +15,9 @@ const mongoose_2 = require("mongoose");
 let Doctor = class Doctor {
     hospital;
     contactNumber;
+    name;
     whatsAppNumber;
+    status;
     treatmentProvide;
     timings;
     workingFrom;
@@ -35,7 +37,15 @@ __decorate([
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
+], Doctor.prototype, "name", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
 ], Doctor.prototype, "whatsAppNumber", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", Boolean)
+], Doctor.prototype, "status", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ type: [String], required: true }),
     __metadata("design:type", Array)

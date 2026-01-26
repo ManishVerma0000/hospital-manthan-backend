@@ -13,7 +13,13 @@ export class Doctor {
   contactNumber: string;
 
   @Prop({ required: true })
+  name: string;
+
+  @Prop({ required: true })
   whatsAppNumber: string;
+
+  @Prop({ required: true })
+  status: boolean;
 
   @Prop({ type: [String], required: true })
   treatmentProvide: string[];
