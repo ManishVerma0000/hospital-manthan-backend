@@ -27,11 +27,9 @@ export class DoctorService {
 
   async deleteById(id: string) {
     const deleted = await this.doctorModel.findByIdAndDelete(id);
-
     if (!deleted) {
       throw new NotFoundException('Doctor not found');
     }
-
     return deleted;
   }
 
