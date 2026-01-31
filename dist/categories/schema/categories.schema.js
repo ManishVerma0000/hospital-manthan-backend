@@ -16,6 +16,7 @@ let Categories = class Categories {
     status;
     imageUrl;
     iconImage;
+    description;
 };
 exports.Categories = Categories;
 __decorate([
@@ -34,6 +35,10 @@ __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Categories.prototype, "iconImage", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], Categories.prototype, "description", void 0);
 exports.Categories = Categories = __decorate([
     (0, mongoose_1.Schema)()
 ], Categories);

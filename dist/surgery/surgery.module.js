@@ -13,6 +13,7 @@ const surgery_service_1 = require("./surgery.service");
 const mongoose_1 = require("@nestjs/mongoose");
 const surgery_schema_1 = require("./schema/surgery.schema");
 const treated_by_schema_1 = require("../treated-by/schema/treated.by.schema");
+const categories_schema_1 = require("../categories/schema/categories.schema");
 let SurgeryModule = class SurgeryModule {
 };
 exports.SurgeryModule = SurgeryModule;
@@ -22,10 +23,11 @@ exports.SurgeryModule = SurgeryModule = __decorate([
             mongoose_1.MongooseModule.forFeature([
                 { name: surgery_schema_1.Surgery.name, schema: surgery_schema_1.SurgerySchema },
                 { name: treated_by_schema_1.TreatedBy.name, schema: treated_by_schema_1.TreatedBySchema },
+                { name: categories_schema_1.Categories.name, schema: categories_schema_1.CategoriesSchema },
             ]),
         ],
         controllers: [surgery_controller_1.SurgeryController],
-        providers: [surgery_service_1.SurgeryService]
+        providers: [surgery_service_1.SurgeryService],
     })
 ], SurgeryModule);
 //# sourceMappingURL=surgery.module.js.map

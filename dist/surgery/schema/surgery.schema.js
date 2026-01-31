@@ -44,8 +44,12 @@ __decorate([
     __metadata("design:type", String)
 ], Surgery.prototype, "diseaseNeme", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", String)
+    (0, mongoose_1.Prop)({
+        type: mongoose_2.Types.ObjectId,
+        ref: 'Categories',
+        required: true,
+    }),
+    __metadata("design:type", mongoose_2.Types.ObjectId)
 ], Surgery.prototype, "surgeryCategory", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),

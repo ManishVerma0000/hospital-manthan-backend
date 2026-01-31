@@ -49,7 +49,7 @@ let SurgeryService = class SurgeryService {
         };
     }
     async findAll() {
-        const response = await this.surgeryModel.find();
+        const response = await this.surgeryModel.find().populate('surgeryCategory');
         return response;
     }
     async deleteById(id) {

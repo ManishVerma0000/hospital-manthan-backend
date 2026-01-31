@@ -17,6 +17,9 @@ export class Categories {
 
   @Prop({ required: true })
   iconImage: string;
+
+  @Prop({ required: true })
+  description: string;
 }
 
 export const CategoriesSchema = SchemaFactory.createForClass(Categories);

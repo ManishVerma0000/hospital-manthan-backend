@@ -4,7 +4,7 @@ export declare class Surgery {
     surgeryName: string;
     paragraph: string;
     diseaseNeme?: string;
-    surgeryCategory: string;
+    surgeryCategory: Types.ObjectId;
     duration: string;
     recoveryTime: string;
     treatedBy: Types.ObjectId;

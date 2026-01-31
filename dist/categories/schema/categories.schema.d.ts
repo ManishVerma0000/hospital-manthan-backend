@@ -5,6 +5,7 @@ export declare class Categories {
     status: boolean;
     imageUrl: string;
     iconImage: string;
+    description: string;
 }
 export declare const CategoriesSchema: import("mongoose").Schema<Categories, import("mongoose").Model<Categories, any, any, any, Document<unknown, any, Categories, any, {}> & Categories & {
     _id: Types.ObjectId;

@@ -15,8 +15,13 @@ export class Surgery {
   @Prop()
   diseaseNeme?: string;
 
-  @Prop({ required: true })
-  surgeryCategory: string;
+  @Prop({
+  type: Types.ObjectId,
+  ref: 'Categories', // must match model name
+  required: true,
+})
+surgeryCategory: Types.ObjectId;
+
 
   @Prop({ required: true })
   duration: string;
