@@ -14,9 +14,12 @@ const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 let BookAppointment = class BookAppointment extends mongoose_2.Document {
     name;
-    email;
+    branch;
+    service;
     phone;
     date;
+    doctorId;
+    surgeryId;
 };
 exports.BookAppointment = BookAppointment;
 __decorate([
@@ -26,7 +29,11 @@ __decorate([
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
-], BookAppointment.prototype, "email", void 0);
+], BookAppointment.prototype, "branch", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], BookAppointment.prototype, "service", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
@@ -35,6 +42,22 @@ __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], BookAppointment.prototype, "date", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: mongoose_2.Types.ObjectId,
+        ref: 'Doctor',
+        required: false,
+    }),
+    __metadata("design:type", mongoose_2.Types.ObjectId)
+], BookAppointment.prototype, "doctorId", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: mongoose_2.Types.ObjectId,
+        ref: 'Surgery',
+        required: false,
+    }),
+    __metadata("design:type", mongoose_2.Types.ObjectId)
+], BookAppointment.prototype, "surgeryId", void 0);
 exports.BookAppointment = BookAppointment = __decorate([
     (0, mongoose_1.Schema)({
         timestamps: true,

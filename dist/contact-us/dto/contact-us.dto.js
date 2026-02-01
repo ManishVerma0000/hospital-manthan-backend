@@ -14,7 +14,9 @@ const class_validator_1 = require("class-validator");
 class ContactUsDto {
     name;
     mobileNumber;
+    email;
     city;
+    remark;
 }
 exports.ContactUsDto = ContactUsDto;
 __decorate([
@@ -28,8 +30,18 @@ __decorate([
     __metadata("design:type", String)
 ], ContactUsDto.prototype, "mobileNumber", void 0);
 __decorate([
+    (0, class_validator_1.IsEmail)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], ContactUsDto.prototype, "email", void 0);
+__decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], ContactUsDto.prototype, "city", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], ContactUsDto.prototype, "remark", void 0);
 //# sourceMappingURL=contact-us.dto.js.map

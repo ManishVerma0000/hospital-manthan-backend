@@ -7,7 +7,7 @@ export class BookAppointmentDto {
 
   @IsString()
   @IsNotEmpty()
-  email: string;
+  service: string;
 
   @IsString()
   @IsNotEmpty()
@@ -15,5 +15,15 @@ export class BookAppointmentDto {
 
   @IsString()
   @IsNotEmpty()
+  branch: string;
+
+  @IsString()
+  @IsNotEmpty()
   date: string;
+
+  @IsString()
+  doctorId?: string | '';
+
+  @IsString()
+  surgeryId?: string | '';
 }

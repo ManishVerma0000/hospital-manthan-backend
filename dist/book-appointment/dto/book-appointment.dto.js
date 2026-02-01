@@ -13,9 +13,12 @@ exports.BookAppointmentDto = void 0;
 const class_validator_1 = require("class-validator");
 class BookAppointmentDto {
     name;
-    email;
+    service;
     phone;
+    branch;
     date;
+    doctorId;
+    surgeryId;
 }
 exports.BookAppointmentDto = BookAppointmentDto;
 __decorate([
@@ -27,7 +30,7 @@ __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], BookAppointmentDto.prototype, "email", void 0);
+], BookAppointmentDto.prototype, "service", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
@@ -37,5 +40,18 @@ __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
+], BookAppointmentDto.prototype, "branch", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
 ], BookAppointmentDto.prototype, "date", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], BookAppointmentDto.prototype, "doctorId", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], BookAppointmentDto.prototype, "surgeryId", void 0);
 //# sourceMappingURL=book-appointment.dto.js.map

@@ -15,7 +15,9 @@ const mongoose_2 = require("mongoose");
 let ContactUs = class ContactUs extends mongoose_2.Document {
     name;
     mobileNumber;
+    email;
     city;
+    remark;
 };
 exports.ContactUs = ContactUs;
 __decorate([
@@ -27,9 +29,17 @@ __decorate([
     __metadata("design:type", String)
 ], ContactUs.prototype, "mobileNumber", void 0);
 __decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], ContactUs.prototype, "email", void 0);
+__decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], ContactUs.prototype, "city", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], ContactUs.prototype, "remark", void 0);
 exports.ContactUs = ContactUs = __decorate([
     (0, mongoose_1.Schema)({
         timestamps: true,

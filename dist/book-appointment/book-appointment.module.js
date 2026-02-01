@@ -13,6 +13,8 @@ const book_appointment_service_1 = require("./book-appointment.service");
 const conn_1 = require("../db/conn");
 const mongoose_1 = require("@nestjs/mongoose");
 const book_appointment_schema_1 = require("./schema/book-appointment.schema");
+const doctor_schema_1 = require("../doctor/schema/doctor.schema");
+const surgery_schema_1 = require("../surgery/schema/surgery.schema");
 let BookAppointmentModule = class BookAppointmentModule {
 };
 exports.BookAppointmentModule = BookAppointmentModule;
@@ -22,10 +24,12 @@ exports.BookAppointmentModule = BookAppointmentModule = __decorate([
             conn_1.DatabaseModule,
             mongoose_1.MongooseModule.forFeature([
                 { name: book_appointment_schema_1.BookAppointment.name, schema: book_appointment_schema_1.BookAppointmentSchema },
+                { name: doctor_schema_1.Doctor.name, schema: doctor_schema_1.DoctorSchema },
+                { name: surgery_schema_1.Surgery.name, schema: surgery_schema_1.SurgerySchema },
             ]),
         ],
         controllers: [book_appointment_controller_1.BookAppointmentController],
-        providers: [book_appointment_service_1.BookAppointmentService]
+        providers: [book_appointment_service_1.BookAppointmentService],
     })
 ], BookAppointmentModule);
 //# sourceMappingURL=book-appointment.module.js.map
