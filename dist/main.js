@@ -10,14 +10,13 @@ async function bootstrap() {
             'http://localhost:3000',
             'http://localhost:3001',
             'http://localhost:3002',
-            "https://admin.healthvandanam.com/",
-            "https://healthvandanam.com/",
-            "https://www.healthvandanam.com",
-            "https://admin.healthvandanam.com",
-            "*"
+            'https://admin.healthvandanam.com',
+            'https://healthvandanam.com',
+            'https://www.healthvandanam.com',
         ],
-        methods: 'GET,POST,PUT,DELETE,PATCH',
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
         credentials: true,
+        allowedHeaders: ['Content-Type', 'Authorization'],
     });
     app.useStaticAssets((0, path_1.join)(process.cwd(), 'uploads'), {
         prefix: '/uploads/',

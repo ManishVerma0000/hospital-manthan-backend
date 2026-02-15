@@ -5,20 +5,21 @@ import { join } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
   app.enableCors({
     origin: [
-      'http://localhost:3000', // Next.js local
-      'http://localhost:3001', 
+      'http://localhost:3000',
+      'http://localhost:3001',
       'http://localhost:3002',
-      "https://admin.healthvandanam.com/",
-      "https://healthvandanam.com/",
-      "https://www.healthvandanam.com",
-      "https://admin.healthvandanam.com",
-      "*"
+      'https://admin.healthvandanam.com',
+      'https://healthvandanam.com',
+      'https://www.healthvandanam.com',
     ],
-    methods: 'GET,POST,PUT,DELETE,PATCH',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
-  })
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  });
+
   app.useStaticAssets(join(process.cwd(), 'uploads'), {
     prefix: '/uploads/',
   });
