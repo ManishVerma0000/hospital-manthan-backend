@@ -21,4 +21,5 @@ export declare class DoctorService {
     }> & {
         __v: number;
     })[]>;
+    update(id: string, updateDoctorDto: CreateDoctorDto): Promise<Doctor>;
 }

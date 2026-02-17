@@ -19,4 +19,9 @@ export declare class TreatedByService {
     }> & {
         __v: number;
     }) | null>;
+    updateById(id: string, payload: TreatedByDto): Promise<(import("mongoose").Document<unknown, {}, TreatedByDocument, {}, {}> & TreatedBy & import("mongoose").Document<import("mongoose").Types.ObjectId, any, any, Record<string, any>, {}> & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }> & {
+        __v: number;
+    }) | null>;
 }

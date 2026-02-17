@@ -36,6 +36,12 @@ let GovermentPanelService = class GovermentPanelService {
             .exec();
         return response;
     }
+    async updateById(id, payload) {
+        const updated = await this.govermentPanelModel
+            .findByIdAndUpdate(id, payload, { new: true })
+            .exec();
+        return updated;
+    }
 };
 exports.GovermentPanelService = GovermentPanelService;
 exports.GovermentPanelService = GovermentPanelService = __decorate([

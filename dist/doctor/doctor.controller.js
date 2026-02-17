@@ -80,6 +80,25 @@ let DoctorController = class DoctorController {
             }, error.status || common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    async updateDoctor(id, requestBody) {
+        try {
+            const updated = await this.doctorService.update(id, requestBody);
+            return {
+                message: 'Doctor updated successfully',
+                data: updated,
+                success: true,
+                statusCode: common_1.HttpStatus.OK,
+            };
+        }
+        catch (error) {
+            console.error(error);
+            throw new common_1.HttpException({
+                message: error.message || 'Error updating doctor',
+                data: null,
+                success: false,
+            }, error.status || common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     async getSurgery(id) {
         try {
             const response = await this.doctorService.getDoctorDetails(id);
@@ -142,6 +161,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], DoctorController.prototype, "deleteDoctor", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, doctor_dto_1.CreateDoctorDto]),
+    __metadata("design:returntype", Promise)
+], DoctorController.prototype, "updateDoctor", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),

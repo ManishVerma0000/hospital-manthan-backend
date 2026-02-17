@@ -50,6 +50,25 @@ let HospitalService = class HospitalService {
             .populate('hospitalType')
             .exec();
     }
+    async update(id, updateHospitalDto) {
+        const updatedHospital = await this.hospitalModel
+            .findByIdAndUpdate(id, {
+            ...updateHospitalDto,
+            hospitalType: new mongoose_2.Types.ObjectId(updateHospitalDto.hospitalType),
+            treatmentList: updateHospitalDto.treatmentList.map((treatmentId) => new mongoose_2.Types.ObjectId(treatmentId)),
+            cashlessList: updateHospitalDto.cashlessList.map((cashlessId) => new mongoose_2.Types.ObjectId(cashlessId)),
+            panelList: updateHospitalDto.panelList.map((panelId) => new mongoose_2.Types.ObjectId(panelId)),
+        }, { new: true })
+            .populate('treatmentList')
+            .populate('cashlessList')
+            .populate('panelList')
+            .populate('hospitalType')
+            .exec();
+        if (!updatedHospital) {
+            throw new common_1.NotFoundException('Hospital not found');
+        }
+        return updatedHospital;
+    }
 };
 exports.HospitalService = HospitalService;
 exports.HospitalService = HospitalService = __decorate([

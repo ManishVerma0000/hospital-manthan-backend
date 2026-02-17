@@ -31,5 +31,17 @@ export class CategoriesService {
 
     return deleted;
   }
+
+  async updateById(id: string, payload: Partial<Categories>): Promise<Categories> {
+    const updated = await this.categoryModel
+      .findByIdAndUpdate(id, payload, { new: true })
+      .exec();
+
+    if (!updated) {
+      throw new NotFoundException('Category not found');
+    }
+
+    return updated;
+  }
 }
 

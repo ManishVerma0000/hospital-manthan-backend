@@ -16,4 +16,5 @@ export declare class InsuranceCompanyController {
         data: null;
         statusCode: number;
     }>;
+    update(id: string, requestBody: CreateInsuranceCompanyDto): Promise<any>;
 }

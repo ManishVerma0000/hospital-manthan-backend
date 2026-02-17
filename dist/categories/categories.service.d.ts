@@ -10,4 +10,5 @@ export declare class CategoriesService {
     }> & {
         __v: number;
     }>;
+    updateById(id: string, payload: Partial<Categories>): Promise<Categories>;
 }

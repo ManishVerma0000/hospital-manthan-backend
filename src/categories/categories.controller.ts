@@ -5,6 +5,7 @@ import {
   Post,
   Delete,
   Param,
+  Put,
 } from '@nestjs/common';
 
 import { CreateCategoryDto } from './dto/categories.dto';
@@ -80,6 +81,32 @@ export class CategoriesController {
     } catch (error) {
       return {
         message: 'Error deleting category',
+        data: null,
+        success: false,
+        statusCode: 500,
+        error: error.message,
+      };
+    }
+  }
+
+  /* ---------------- Update ---------------- */
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() requestBody: Partial<CreateCategoryDto>,
+  ): Promise<any> {
+    try {
+      const response = await this.categoryService.updateById(id, requestBody);
+
+      return {
+        message: 'Category updated successfully',
+        data: response,
+        success: true,
+        statusCode: 200,
+      };
+    } catch (error) {
+      return {
+        message: error.message || 'Error updating category',
         data: null,
         success: false,
         statusCode: 500,

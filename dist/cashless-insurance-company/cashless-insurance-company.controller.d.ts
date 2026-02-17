@@ -6,4 +6,5 @@ export declare class CashlessInsuranceCompanyController {
     create(requestBody: CreateCashlessInsuranceDto): Promise<any>;
     findAll(): Promise<any>;
     delete(id: string): Promise<any>;
+    update(id: string, requestBody: CreateCashlessInsuranceDto): Promise<any>;
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { InsuranceCompanyService } from './insurance-company.service';
 import { CreateInsuranceCompanyDto } from './dto/insurance-company.dto';
 
@@ -64,6 +64,40 @@ export class InsuranceCompanyController {
     } catch (error) {
       return {
         message: error.message || 'Error deleting Insurance Company',
+        success: false,
+        data: null,
+        statusCode: 500,
+      };
+    }
+  }
+
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() requestBody: CreateInsuranceCompanyDto,
+  ): Promise<any> {
+    try {
+      const updated =
+        await this.hospitalCategoryService.updateById(id, requestBody);
+
+      if (!updated) {
+        return {
+          message: 'Insurance Company not found',
+          success: false,
+          data: null,
+          statusCode: 404,
+        };
+      }
+
+      return {
+        message: 'Insurance Company updated successfully',
+        success: true,
+        data: updated,
+        statusCode: 200,
+      };
+    } catch (error) {
+      return {
+        message: error.message || 'Error updating Insurance Company',
         success: false,
         data: null,
         statusCode: 500,

@@ -7,6 +7,7 @@ import {
   Post,
   HttpStatus,
   HttpException,
+  Put,
 } from '@nestjs/common';
 
 import { HospitalCategoryService } from './hospital-category.service';
@@ -117,6 +118,44 @@ export class HospitalCategoryController {
         },
         error.status ||
           HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  /* ---------------- Update ---------------- */
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() requestBody: CreateHospitalCategoryDto,
+  ): Promise<any> {
+    try {
+      const updated =
+        await this.hospitalCategoryService.updateById(id, requestBody);
+
+      if (!updated) {
+        throw new HttpException(
+          'Hospital Category not found',
+          HttpStatus.NOT_FOUND,
+        );
+      }
+
+      return {
+        message: 'Hospital Category updated successfully',
+        success: true,
+        data: updated,
+        statusCode: HttpStatus.OK,
+      };
+    } catch (error) {
+      console.error(error);
+
+      throw new HttpException(
+        {
+          message:
+            error.message || 'Error updating Hospital Category',
+          success: false,
+          data: null,
+        },
+        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }

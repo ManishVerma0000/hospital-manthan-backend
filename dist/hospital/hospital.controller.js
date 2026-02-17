@@ -81,6 +81,25 @@ let HospitalController = class HospitalController {
             }, error.status || common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    async updateHospital(id, requestBody) {
+        try {
+            const updated = await this.hospitalServices.update(id, requestBody);
+            return {
+                message: 'Hospital updated successfully',
+                data: updated,
+                success: true,
+                statusCode: common_1.HttpStatus.OK,
+            };
+        }
+        catch (error) {
+            console.error(error);
+            throw new common_1.HttpException({
+                message: error.message || 'Error updating Hospital',
+                data: null,
+                success: false,
+            }, error.status || common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     async getSurgery(id) {
         try {
             const response = await this.hospitalServices.getHospitalDetails(id);
@@ -124,6 +143,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], HospitalController.prototype, "deleteHospital", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, hospital_dto_1.CreateHospitalDto]),
+    __metadata("design:returntype", Promise)
+], HospitalController.prototype, "updateHospital", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),

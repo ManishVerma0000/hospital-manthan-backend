@@ -81,6 +81,25 @@ let GovermentPanelController = class GovermentPanelController {
             };
         }
     }
+    async update(id, requestBody) {
+        try {
+            const updated = await this.govermentPanelService.updateById(id, requestBody);
+            return {
+                message: 'Government panel updated successfully',
+                data: updated,
+                success: true,
+                statusCode: 200,
+            };
+        }
+        catch (error) {
+            return {
+                message: error.message || 'Error updating government panel',
+                data: null,
+                success: false,
+                statusCode: 500,
+            };
+        }
+    }
 };
 exports.GovermentPanelController = GovermentPanelController;
 __decorate([
@@ -103,6 +122,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], GovermentPanelController.prototype, "delete", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, create_government_panel_dto_1.CreateGovernmentPanelDto]),
+    __metadata("design:returntype", Promise)
+], GovermentPanelController.prototype, "update", null);
 exports.GovermentPanelController = GovermentPanelController = __decorate([
     (0, common_1.Controller)('goverment-panel'),
     __metadata("design:paramtypes", [goverment_panel_service_1.GovermentPanelService])

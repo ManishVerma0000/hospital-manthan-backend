@@ -85,6 +85,26 @@ let SurgeryController = class SurgeryController {
             };
         }
     }
+    async updateSurgery(id, dto) {
+        try {
+            const response = await this.surgeryService.updateSurgery(id, dto);
+            return {
+                message: 'Surgery updated successfully',
+                data: response.data,
+                success: true,
+                statusCode: 200,
+            };
+        }
+        catch (error) {
+            return {
+                message: error.message || 'Error updating Surgery',
+                data: null,
+                success: false,
+                statusCode: 500,
+                error: error.message,
+            };
+        }
+    }
 };
 exports.SurgeryController = SurgeryController;
 __decorate([
@@ -114,6 +134,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], SurgeryController.prototype, "getSurgery", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, CreateSurgeryDto_1.CreateSurgeryDto]),
+    __metadata("design:returntype", Promise)
+], SurgeryController.prototype, "updateSurgery", null);
 exports.SurgeryController = SurgeryController = __decorate([
     (0, common_1.Controller)('surgery'),
     __metadata("design:paramtypes", [surgery_service_1.SurgeryService])

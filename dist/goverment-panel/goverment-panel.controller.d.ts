@@ -16,4 +16,5 @@ export declare class GovermentPanelController {
         data: null;
         statusCode: number;
     }>;
+    update(id: string, requestBody: CreateGovernmentPanelDto): Promise<any>;
 }

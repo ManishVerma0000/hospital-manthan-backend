@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CashlessInsuranceCompanyService } from './cashless-insurance-company.service';
 import { CreateCashlessInsuranceDto } from './dto/create-cashless-insurance.dto';
 
@@ -78,6 +78,44 @@ export class CashlessInsuranceCompanyController {
     } catch (error) {
       return {
         message: 'Error deleting cashless insurance',
+        success: false,
+        data: null,
+        statusCode: 500,
+        error: error.message,
+      };
+    }
+  }
+
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() requestBody: CreateCashlessInsuranceDto,
+  ): Promise<any> {
+    try {
+      const updated =
+        await this.cashlessInsuranceCompanyService.updateById(
+          id,
+          requestBody,
+        );
+
+      if (!updated) {
+        return {
+          message: 'Cashless insurance not found',
+          success: false,
+          data: null,
+          statusCode: 404,
+        };
+      }
+
+      return {
+        message: 'Cashless insurance updated successfully',
+        success: true,
+        data: updated,
+        statusCode: 200,
+      };
+    } catch (error) {
+      return {
+        message: 'Error updating cashless insurance',
         success: false,
         data: null,
         statusCode: 500,

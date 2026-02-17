@@ -50,7 +50,17 @@ let DoctorService = class DoctorService {
     }
     async getDoctorsByHospital(hospitalId) {
         return await this.doctorModel
-            .find({ hospital: hospitalId });
+            .find({ hospital: hospitalId })
+            .exec();
+    }
+    async update(id, updateDoctorDto) {
+        const updated = await this.doctorModel
+            .findByIdAndUpdate(id, updateDoctorDto, { new: true })
+            .exec();
+        if (!updated) {
+            throw new common_1.NotFoundException('Doctor not found');
+        }
+        return updated;
     }
 };
 exports.DoctorService = DoctorService;

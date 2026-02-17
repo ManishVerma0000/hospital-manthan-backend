@@ -33,6 +33,12 @@ let CashlessInsuranceCompanyService = class CashlessInsuranceCompanyService {
     async deleteById(id) {
         return this.govermentPanelModel.findByIdAndDelete(id);
     }
+    async updateById(id, payload) {
+        const updated = await this.govermentPanelModel
+            .findByIdAndUpdate(id, payload, { new: true })
+            .exec();
+        return updated;
+    }
 };
 exports.CashlessInsuranceCompanyService = CashlessInsuranceCompanyService;
 exports.CashlessInsuranceCompanyService = CashlessInsuranceCompanyService = __decorate([

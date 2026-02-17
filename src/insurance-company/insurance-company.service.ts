@@ -27,4 +27,12 @@ export class InsuranceCompanyService {
     const response = await this.insuranceCompany.findByIdAndDelete(id).exec();
     return response;
   }
+
+  async updateById(id: string, payload: any): Promise<any> {
+    const updated = await this.insuranceCompany
+      .findByIdAndUpdate(id, payload, { new: true })
+      .exec();
+
+    return updated;
+  }
 }

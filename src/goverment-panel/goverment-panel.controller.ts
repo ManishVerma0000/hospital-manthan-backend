@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { GovermentPanelService } from './goverment-panel.service';
 import { CreateGovernmentPanelDto } from './dto/create-government-panel.dto';
 
@@ -64,6 +64,32 @@ export class GovermentPanelController {
         message: error.message || 'Error deleting Insurance Company',
         success: false,
         data: null,
+        statusCode: 500,
+      };
+    }
+  }
+
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() requestBody: CreateGovernmentPanelDto,
+  ): Promise<any> {
+    try {
+      const updated = await this.govermentPanelService.updateById(
+        id,
+        requestBody,
+      );
+      return {
+        message: 'Government panel updated successfully',
+        data: updated,
+        success: true,
+        statusCode: 200,
+      };
+    } catch (error) {
+      return {
+        message: error.message || 'Error updating government panel',
+        data: null,
+        success: false,
         statusCode: 500,
       };
     }

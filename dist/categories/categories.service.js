@@ -36,6 +36,15 @@ let CategoriesService = class CategoriesService {
         }
         return deleted;
     }
+    async updateById(id, payload) {
+        const updated = await this.categoryModel
+            .findByIdAndUpdate(id, payload, { new: true })
+            .exec();
+        if (!updated) {
+            throw new common_1.NotFoundException('Category not found');
+        }
+        return updated;
+    }
 };
 exports.CategoriesService = CategoriesService;
 exports.CategoriesService = CategoriesService = __decorate([

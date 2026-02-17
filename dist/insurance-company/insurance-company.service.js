@@ -34,6 +34,12 @@ let InsuranceCompanyService = class InsuranceCompanyService {
         const response = await this.insuranceCompany.findByIdAndDelete(id).exec();
         return response;
     }
+    async updateById(id, payload) {
+        const updated = await this.insuranceCompany
+            .findByIdAndUpdate(id, payload, { new: true })
+            .exec();
+        return updated;
+    }
 };
 exports.InsuranceCompanyService = InsuranceCompanyService;
 exports.InsuranceCompanyService = InsuranceCompanyService = __decorate([

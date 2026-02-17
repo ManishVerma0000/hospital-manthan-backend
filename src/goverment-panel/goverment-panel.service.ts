@@ -27,4 +27,12 @@ export class GovermentPanelService {
       .exec();
     return response;
   }
+
+  async updateById(id: string, payload: any): Promise<any> {
+    const updated = await this.govermentPanelModel
+      .findByIdAndUpdate(id, payload, { new: true })
+      .exec();
+
+    return updated;
+  }
 }

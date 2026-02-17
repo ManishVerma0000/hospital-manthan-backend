@@ -21,4 +21,9 @@ export declare class HospitalService {
     }> & {
         __v: number;
     }) | null>;
+    update(id: string, updateHospitalDto: CreateHospitalDto): Promise<import("mongoose").Document<unknown, {}, HospitalDocument, {}, {}> & Hospital & import("mongoose").Document<Types.ObjectId, any, any, Record<string, any>, {}> & Required<{
+        _id: Types.ObjectId;
+    }> & {
+        __v: number;
+    }>;
 }

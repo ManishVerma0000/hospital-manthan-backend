@@ -20,4 +20,11 @@ export class CashlessInsuranceCompanyService {
   async deleteById(id: string) {
     return this.govermentPanelModel.findByIdAndDelete(id);
   }
+
+  async updateById(id: string, payload: any): Promise<any> {
+    const updated = await this.govermentPanelModel
+      .findByIdAndUpdate(id, payload, { new: true })
+      .exec();
+    return updated;
+  }
 }

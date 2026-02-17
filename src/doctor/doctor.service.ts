@@ -43,5 +43,18 @@ export class DoctorService {
   async getDoctorsByHospital(hospitalId: string) {
     return await this.doctorModel
       .find({ hospital: hospitalId }) // 🔥 filter by hospital id
+      .exec();
+  }
+
+  async update(id: string, updateDoctorDto: CreateDoctorDto): Promise<Doctor> {
+    const updated = await this.doctorModel
+      .findByIdAndUpdate(id, updateDoctorDto, { new: true })
+      .exec();
+
+    if (!updated) {
+      throw new NotFoundException('Doctor not found');
+    }
+
+    return updated;
   }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 
 import { TreatedByService } from './treated-by.service';
 import { TreatedByDto } from './dto/treated-by.dto';
@@ -70,6 +70,40 @@ export class TreatedByController {
     } catch (error) {
       return {
         message: error.message || 'Delete failed',
+        success: false,
+        data: null,
+        statusCode: 500,
+      };
+    }
+  }
+
+  /* UPDATE */
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() body: TreatedByDto,
+  ): Promise<any> {
+    try {
+      const updated = await this.treatedByService.updateById(id, body);
+
+      if (!updated) {
+        return {
+          message: 'Treated By not found',
+          success: false,
+          data: null,
+          statusCode: 404,
+        };
+      }
+
+      return {
+        message: 'Treated By updated successfully',
+        success: true,
+        data: updated,
+        statusCode: 200,
+      };
+    } catch (error) {
+      return {
+        message: error.message || 'Update failed',
         success: false,
         data: null,
         statusCode: 500,

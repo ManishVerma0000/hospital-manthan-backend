@@ -6,4 +6,5 @@ export declare class HospitalCategoryController {
     create(requestBody: CreateHospitalCategoryDto): Promise<any>;
     findAll(): Promise<any>;
     delete(id: string): Promise<any>;
+    update(id: string, requestBody: CreateHospitalCategoryDto): Promise<any>;
 }

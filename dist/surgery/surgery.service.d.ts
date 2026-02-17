@@ -28,4 +28,13 @@ export declare class SurgeryService {
     }> & {
         __v: number;
     }) | null>;
+    updateSurgery(id: string, dto: CreateSurgeryDto): Promise<{
+        success: boolean;
+        message: string;
+        data: import("mongoose").Document<unknown, {}, SurgeryDocument, {}, {}> & Surgery & import("mongoose").Document<import("mongoose").Types.ObjectId, any, any, Record<string, any>, {}> & Required<{
+            _id: import("mongoose").Types.ObjectId;
+        }> & {
+            __v: number;
+        };
+    }>;
 }

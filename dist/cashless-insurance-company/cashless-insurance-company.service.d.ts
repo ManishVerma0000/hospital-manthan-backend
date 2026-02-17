@@ -10,4 +10,5 @@ export declare class CashlessInsuranceCompanyService {
     }> & {
         __v: number;
     }) | null>;
+    updateById(id: string, payload: any): Promise<any>;
 }

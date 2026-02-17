@@ -6,6 +6,7 @@ export declare class DoctorController {
     create(requestBody: CreateDoctorDto): Promise<any>;
     getDoctorList(): Promise<any>;
     deleteDoctor(id: string): Promise<any>;
+    updateDoctor(id: string, requestBody: CreateDoctorDto): Promise<any>;
     getSurgery(id: string): Promise<{
         message: string;
         data: (import("mongoose").Document<unknown, {}, import("./schema/doctor.schema").DoctorDocument, {}, {}> & import("./schema/doctor.schema").Doctor & import("mongoose").Document<import("mongoose").Types.ObjectId, any, any, Record<string, any>, {}> & Required<{

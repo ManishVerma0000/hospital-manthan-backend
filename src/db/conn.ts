@@ -10,7 +10,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         uri: configService.get<string>('MONGO_URI')
+      
       }),
+      
     }),
   ],
   exports: [MongooseModule],

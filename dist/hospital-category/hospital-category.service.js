@@ -35,6 +35,12 @@ let HospitalCategoryService = class HospitalCategoryService {
         const response = await this.doctorModel.findByIdAndDelete({ _id: id });
         return response;
     }
+    async updateById(id, payload) {
+        const updated = await this.doctorModel
+            .findByIdAndUpdate(id, payload, { new: true })
+            .exec();
+        return updated;
+    }
 };
 exports.HospitalCategoryService = HospitalCategoryService;
 exports.HospitalCategoryService = HospitalCategoryService = __decorate([

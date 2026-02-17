@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateHospitalDto } from './dto/hospital.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Hospital, HospitalDocument } from './schema/hospital.schema';
@@ -47,5 +47,37 @@ export class HospitalService {
       .populate('panelList') // GovernmentPanel
       .populate('hospitalType') // Category (if ref added)
       .exec();
+  }
+
+  async update(id: string, updateHospitalDto: CreateHospitalDto) {
+    const updatedHospital = await this.hospitalModel
+      .findByIdAndUpdate(
+        id,
+        {
+          ...updateHospitalDto,
+          hospitalType: new Types.ObjectId(updateHospitalDto.hospitalType),
+          treatmentList: updateHospitalDto.treatmentList.map(
+            (treatmentId) => new Types.ObjectId(treatmentId),
+          ),
+          cashlessList: updateHospitalDto.cashlessList.map(
+            (cashlessId) => new Types.ObjectId(cashlessId),
+          ),
+          panelList: updateHospitalDto.panelList.map(
+            (panelId) => new Types.ObjectId(panelId),
+          ),
+        },
+        { new: true },
+      )
+      .populate('treatmentList')
+      .populate('cashlessList')
+      .populate('panelList')
+      .populate('hospitalType')
+      .exec();
+
+    if (!updatedHospital) {
+      throw new NotFoundException('Hospital not found');
+    }
+
+    return updatedHospital;
   }
 }

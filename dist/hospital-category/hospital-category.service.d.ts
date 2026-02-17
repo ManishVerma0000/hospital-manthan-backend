@@ -6,4 +6,5 @@ export declare class HospitalCategoryService {
     create(requestBody: any): Promise<any>;
     findAll(): Promise<any>;
     deleteById(id: string): Promise<any>;
+    updateById(id: string, payload: any): Promise<any>;
 }

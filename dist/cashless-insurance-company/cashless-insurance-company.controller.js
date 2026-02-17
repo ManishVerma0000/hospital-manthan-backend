@@ -90,6 +90,34 @@ let CashlessInsuranceCompanyController = class CashlessInsuranceCompanyControlle
             };
         }
     }
+    async update(id, requestBody) {
+        try {
+            const updated = await this.cashlessInsuranceCompanyService.updateById(id, requestBody);
+            if (!updated) {
+                return {
+                    message: 'Cashless insurance not found',
+                    success: false,
+                    data: null,
+                    statusCode: 404,
+                };
+            }
+            return {
+                message: 'Cashless insurance updated successfully',
+                success: true,
+                data: updated,
+                statusCode: 200,
+            };
+        }
+        catch (error) {
+            return {
+                message: 'Error updating cashless insurance',
+                success: false,
+                data: null,
+                statusCode: 500,
+                error: error.message,
+            };
+        }
+    }
 };
 exports.CashlessInsuranceCompanyController = CashlessInsuranceCompanyController;
 __decorate([
@@ -112,6 +140,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], CashlessInsuranceCompanyController.prototype, "delete", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, create_cashless_insurance_dto_1.CreateCashlessInsuranceDto]),
+    __metadata("design:returntype", Promise)
+], CashlessInsuranceCompanyController.prototype, "update", null);
 exports.CashlessInsuranceCompanyController = CashlessInsuranceCompanyController = __decorate([
     (0, common_1.Controller)('cashless-insurance-company'),
     __metadata("design:paramtypes", [cashless_insurance_company_service_1.CashlessInsuranceCompanyService])

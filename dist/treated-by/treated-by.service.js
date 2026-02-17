@@ -31,6 +31,11 @@ let TreatedByService = class TreatedByService {
     async deleteById(id) {
         return await this.treatedByModel.findByIdAndDelete(id);
     }
+    async updateById(id, payload) {
+        return await this.treatedByModel
+            .findByIdAndUpdate(id, payload, { new: true })
+            .exec();
+    }
 };
 exports.TreatedByService = TreatedByService;
 exports.TreatedByService = TreatedByService = __decorate([

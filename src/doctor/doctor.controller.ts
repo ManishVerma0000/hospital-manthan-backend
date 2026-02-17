@@ -7,6 +7,7 @@ import {
   Param,
   HttpStatus,
   HttpException,
+  Put,
 } from '@nestjs/common';
 
 import { DoctorService } from './doctor.service';
@@ -83,6 +84,34 @@ export class DoctorController {
       throw new HttpException(
         {
           message: error.message || 'Error deleting doctor',
+          data: null,
+          success: false,
+        },
+        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  /* ---------------- Update ---------------- */
+  @Put(':id')
+  async updateDoctor(
+    @Param('id') id: string,
+    @Body() requestBody: CreateDoctorDto,
+  ): Promise<any> {
+    try {
+      const updated = await this.doctorService.update(id, requestBody);
+
+      return {
+        message: 'Doctor updated successfully',
+        data: updated,
+        success: true,
+        statusCode: HttpStatus.OK,
+      };
+    } catch (error) {
+      console.error(error);
+      throw new HttpException(
+        {
+          message: error.message || 'Error updating doctor',
           data: null,
           success: false,
         },

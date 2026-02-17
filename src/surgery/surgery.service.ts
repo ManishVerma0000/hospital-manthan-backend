@@ -54,4 +54,42 @@ export class SurgeryService {
       .populate('treatedBy', 'treatedByName') // 👈 only fetch name
       .exec();
   }
+
+  async updateSurgery(id: string, dto: CreateSurgeryDto) {
+    const cleanedPayload = {
+      ...dto,
+      benefits: dto.benefits?.filter(Boolean),
+      risks: dto.risks?.filter(Boolean),
+      images: dto.images?.filter(Boolean),
+      symptoms: dto.symptoms?.filter((s) => s.subcategory),
+      procedureTimeline: dto.procedureTimeline
+        ?.filter((p) => p.step) // keep only valid rows
+        .map((p) => ({
+          step: p.step.trim(),
+          typeProcedure: p.typeProcedure,
+          duration: p.duration,
+          medication: p.medication,
+        })),
+      recoveryTimeline: dto.recoveryTimeline?.filter(
+        (r) => r.stage || r.mention || r.lightCare,
+      ),
+      faqs: dto.faqs?.filter((f) => f.question && f.answer),
+    };
+
+    const updatedSurgery = await this.surgeryModel
+      .findByIdAndUpdate(id, cleanedPayload, { new: true })
+      .populate('surgeryCategory')
+      .populate('treatedBy', 'treatedByName')
+      .exec();
+
+    if (!updatedSurgery) {
+      throw new Error('Surgery not found');
+    }
+
+    return {
+      success: true,
+      message: 'Surgery updated successfully',
+      data: updatedSurgery,
+    };
+  }
 }

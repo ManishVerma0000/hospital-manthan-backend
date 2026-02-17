@@ -20,4 +20,5 @@ export declare class TreatedByController {
         data: null;
         statusCode: number;
     }>;
+    update(id: string, body: TreatedByDto): Promise<any>;
 }

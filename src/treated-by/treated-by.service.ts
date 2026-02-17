@@ -24,4 +24,10 @@ export class TreatedByService {
   async deleteById(id: string) {
     return await this.treatedByModel.findByIdAndDelete(id);
   }
+
+  async updateById(id: string, payload: TreatedByDto) {
+    return await this.treatedByModel
+      .findByIdAndUpdate(id, payload, { new: true })
+      .exec();
+  }
 }

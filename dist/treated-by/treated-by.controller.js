@@ -81,6 +81,33 @@ let TreatedByController = class TreatedByController {
             };
         }
     }
+    async update(id, body) {
+        try {
+            const updated = await this.treatedByService.updateById(id, body);
+            if (!updated) {
+                return {
+                    message: 'Treated By not found',
+                    success: false,
+                    data: null,
+                    statusCode: 404,
+                };
+            }
+            return {
+                message: 'Treated By updated successfully',
+                success: true,
+                data: updated,
+                statusCode: 200,
+            };
+        }
+        catch (error) {
+            return {
+                message: error.message || 'Update failed',
+                success: false,
+                data: null,
+                statusCode: 500,
+            };
+        }
+    }
 };
 exports.TreatedByController = TreatedByController;
 __decorate([
@@ -103,6 +130,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], TreatedByController.prototype, "delete", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, treated_by_dto_1.TreatedByDto]),
+    __metadata("design:returntype", Promise)
+], TreatedByController.prototype, "update", null);
 exports.TreatedByController = TreatedByController = __decorate([
     (0, common_1.Controller)('treated-by'),
     __metadata("design:paramtypes", [treated_by_service_1.TreatedByService])

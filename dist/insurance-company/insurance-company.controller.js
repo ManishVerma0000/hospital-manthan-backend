@@ -81,6 +81,33 @@ let InsuranceCompanyController = class InsuranceCompanyController {
             };
         }
     }
+    async update(id, requestBody) {
+        try {
+            const updated = await this.hospitalCategoryService.updateById(id, requestBody);
+            if (!updated) {
+                return {
+                    message: 'Insurance Company not found',
+                    success: false,
+                    data: null,
+                    statusCode: 404,
+                };
+            }
+            return {
+                message: 'Insurance Company updated successfully',
+                success: true,
+                data: updated,
+                statusCode: 200,
+            };
+        }
+        catch (error) {
+            return {
+                message: error.message || 'Error updating Insurance Company',
+                success: false,
+                data: null,
+                statusCode: 500,
+            };
+        }
+    }
 };
 exports.InsuranceCompanyController = InsuranceCompanyController;
 __decorate([
@@ -103,6 +130,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], InsuranceCompanyController.prototype, "delete", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, insurance_company_dto_1.CreateInsuranceCompanyDto]),
+    __metadata("design:returntype", Promise)
+], InsuranceCompanyController.prototype, "update", null);
 exports.InsuranceCompanyController = InsuranceCompanyController = __decorate([
     (0, common_1.Controller)('insurance-company'),
     __metadata("design:paramtypes", [insurance_company_service_1.InsuranceCompanyService])

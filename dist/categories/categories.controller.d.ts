@@ -6,4 +6,5 @@ export declare class CategoriesController {
     create(requestBody: CreateCategoryDto): Promise<any>;
     findAll(): Promise<any>;
     delete(id: string): Promise<any>;
+    update(id: string, requestBody: Partial<CreateCategoryDto>): Promise<any>;
 }

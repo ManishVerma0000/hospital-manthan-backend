@@ -83,6 +83,28 @@ let HospitalCategoryController = class HospitalCategoryController {
                 common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    async update(id, requestBody) {
+        try {
+            const updated = await this.hospitalCategoryService.updateById(id, requestBody);
+            if (!updated) {
+                throw new common_1.HttpException('Hospital Category not found', common_1.HttpStatus.NOT_FOUND);
+            }
+            return {
+                message: 'Hospital Category updated successfully',
+                success: true,
+                data: updated,
+                statusCode: common_1.HttpStatus.OK,
+            };
+        }
+        catch (error) {
+            console.error(error);
+            throw new common_1.HttpException({
+                message: error.message || 'Error updating Hospital Category',
+                success: false,
+                data: null,
+            }, error.status || common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 };
 exports.HospitalCategoryController = HospitalCategoryController;
 __decorate([
@@ -105,6 +127,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], HospitalCategoryController.prototype, "delete", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, hospital_category_dto_1.CreateHospitalCategoryDto]),
+    __metadata("design:returntype", Promise)
+], HospitalCategoryController.prototype, "update", null);
 exports.HospitalCategoryController = HospitalCategoryController = __decorate([
     (0, common_1.Controller)('hospital-category'),
     __metadata("design:paramtypes", [hospital_category_service_1.HospitalCategoryService])
